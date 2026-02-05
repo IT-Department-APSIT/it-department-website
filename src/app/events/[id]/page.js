@@ -112,7 +112,11 @@ export default function EventDetailPage() {
             <div className="page-header">
                 <div className="container">
                     <button
-                        onClick={() => router.push('/events')}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            router.push('/events');
+                        }}
                         style={{
                             background: 'transparent',
                             border: 'none',
@@ -123,7 +127,19 @@ export default function EventDetailPage() {
                             gap: '0.5rem',
                             fontSize: '1rem',
                             marginBottom: '1rem',
-                            padding: '0.5rem 0'
+                            padding: '0.5rem 0',
+                            outline: 'none',
+                            position: 'relative',
+                            zIndex: 10,
+                            transition: 'all 0.2s ease'
+                        }}
+                        onMouseOver={(e) => {
+                            e.target.style.color = 'var(--primary)';
+                            e.target.style.transform = 'translateX(-2px)';
+                        }}
+                        onMouseOut={(e) => {
+                            e.target.style.color = 'var(--accent)';
+                            e.target.style.transform = 'translateX(0)';
                         }}
                     >
                         <ArrowLeft size={20} /> Back to Events
@@ -154,26 +170,27 @@ export default function EventDetailPage() {
                         initial="hidden"
                         animate="visible"
                         variants={fadeInUp}
-                        className="card"
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: event.poster_url ? '1fr 400px' : '1fr',
-                            gap: '3rem',
-                            padding: '3rem'
-                        }}
+                        className="card event-detail-grid"
                     >
+                        {/* Right Column - Poster (appears first on mobile) */}
+                        {event.poster_url && (
+                            <div className="event-poster-sticky">
+                                <div className="event-poster-container">
+                                    <img
+                                        src={event.poster_url}
+                                        alt={event.event_name}
+                                    />
+                                </div>
+                            </div>
+                        )}
+
                         {/* Left Column - Event Details */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                        <div className="event-detail-content">
                             {/* Date and Venue */}
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                 {event.event_date && (
-                                    <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '1rem',
-                                        padding: '1rem',
+                                    <div className="event-info-card" style={{
                                         background: 'linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(147,51,234,0.1) 100%)',
-                                        borderRadius: '12px',
                                         border: '1px solid rgba(59,130,246,0.2)'
                                     }}>
                                         <Calendar size={24} color="var(--secondary)" />
@@ -189,13 +206,8 @@ export default function EventDetailPage() {
                                 )}
 
                                 {event.venue && (
-                                    <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '1rem',
-                                        padding: '1rem',
+                                    <div className="event-info-card" style={{
                                         background: 'linear-gradient(135deg, rgba(251,191,36,0.1) 0%, rgba(245,158,11,0.1) 100%)',
-                                        borderRadius: '12px',
                                         border: '1px solid rgba(251,191,36,0.2)'
                                     }}>
                                         <MapPin size={24} color="var(--accent)" />
@@ -233,32 +245,6 @@ export default function EventDetailPage() {
                                 </div>
                             )}
                         </div>
-
-                        {/* Right Column - Poster */}
-                        {event.poster_url && (
-                            <div style={{
-                                position: 'sticky',
-                                top: '2rem',
-                                height: 'fit-content'
-                            }}>
-                                <div style={{
-                                    borderRadius: '16px',
-                                    overflow: 'hidden',
-                                    boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-                                    border: '2px solid rgba(251,191,36,0.2)'
-                                }}>
-                                    <img
-                                        src={event.poster_url}
-                                        alt={event.event_name}
-                                        style={{
-                                            width: '100%',
-                                            height: 'auto',
-                                            display: 'block'
-                                        }}
-                                    />
-                                </div>
-                            </div>
-                        )}
                     </motion.div>
 
                     {/* Media Gallery */}
@@ -284,17 +270,6 @@ export default function EventDetailPage() {
                                 }}>
                                     Event Gallery
                                 </h2>
-                                <span style={{
-                                    padding: '4px 12px',
-                                    background: 'rgba(251,191,36,0.2)',
-                                    border: '1px solid rgba(251,191,36,0.3)',
-                                    borderRadius: '50px',
-                                    fontSize: '0.85rem',
-                                    fontWeight: 600,
-                                    color: 'var(--accent)'
-                                }}>
-                                    {event.media_urls.length} {event.media_urls.length === 1 ? 'item' : 'items'}
-                                </span>
                             </div>
 
                             <div style={{

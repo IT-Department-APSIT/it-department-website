@@ -1,8 +1,9 @@
 "use client";
 import Link from 'next/link';
-import { Folder } from 'lucide-react';
+import { Folder, ArrowLeft } from 'lucide-react';
+import AdminLayout from '@/components/admin/AdminLayout';
 
-export default function AdminHomePage() {
+function HomeManagementContent() {
     const folders = [
         { name: 'Hero', href: '/admin/home/hero' },
         { name: 'Hall of Fame', href: '/admin/home/hall-of-fame' },
@@ -13,38 +14,44 @@ export default function AdminHomePage() {
 
     return (
         <div style={{
-            minHeight: '100vh',
-            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-            padding: '3rem 2rem',
+            padding: '2rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <div style={{ marginBottom: '2rem' }}>
-                <Link
-                    href="/admin"
-                    style={{
-                        color: '#fbbf24',
-                        textDecoration: 'none',
-                        fontSize: '1rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem'
-                    }}
-                >
-                    ← Back to Admin Panel
-                </Link>
-            </div>
-
-            <h1 style={{
-                fontSize: '2.5rem',
-                fontWeight: '700',
-                color: '#fff',
-                marginBottom: '3rem',
-                textAlign: 'center'
+            <div style={{
+                width: '100%',
+                maxWidth: '1100px',
+                marginBottom: '2rem'
             }}>
-                Home Management
-            </h1>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <Link
+                        href="/admin"
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '40px',
+                            height: '40px',
+                            background: 'rgba(255, 255, 255, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            borderRadius: '10px',
+                            color: '#fff',
+                            textDecoration: 'none'
+                        }}
+                    >
+                        <ArrowLeft size={20} />
+                    </Link>
+                    <h1 style={{
+                        fontSize: '1.75rem',
+                        fontWeight: '700',
+                        color: '#fff',
+                        margin: 0
+                    }}>
+                        Home Management
+                    </h1>
+                </div>
+            </div>
 
             <div style={{
                 display: 'grid',
@@ -99,5 +106,13 @@ export default function AdminHomePage() {
                 ))}
             </div>
         </div>
+    );
+}
+
+export default function AdminHomePage() {
+    return (
+        <AdminLayout>
+            <HomeManagementContent />
+        </AdminLayout>
     );
 }

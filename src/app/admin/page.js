@@ -1,8 +1,12 @@
 "use client";
 import Link from 'next/link';
 import { Folder } from 'lucide-react';
+import AdminLayout from '@/components/admin/AdminLayout';
+import { useAuth } from '@/context/AuthContext';
 
-export default function AdminPage() {
+function AdminDashboardContent() {
+    const { admin, loading } = useAuth();
+
     const folders = [
         { name: 'Home', href: '/admin/home' },
         { name: 'Events', href: '/admin/events' },
@@ -10,24 +14,54 @@ export default function AdminPage() {
         { name: 'ITSA', href: '/admin/itsa' },
     ];
 
+    if (loading) {
+        return (
+            <div style={{
+                minHeight: 'calc(100vh - 70px)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
+                <div style={{
+                    width: '40px',
+                    height: '40px',
+                    border: '3px solid rgba(255, 255, 255, 0.1)',
+                    borderTopColor: '#fbbf24',
+                    borderRadius: '50%',
+                    animation: 'spin 0.8s linear infinite'
+                }} />
+                <style jsx>{`
+                    @keyframes spin {
+                        to { transform: rotate(360deg); }
+                    }
+                `}</style>
+            </div>
+        );
+    }
+
     return (
         <div style={{
-            minHeight: '100vh',
-            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
             padding: '3rem 2rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <h1 style={{
-                fontSize: '2.5rem',
-                fontWeight: '700',
-                color: '#fff',
-                marginBottom: '3rem',
-                textAlign: 'center'
-            }}>
-                Admin Panel
-            </h1>
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                <h1 style={{
+                    fontSize: '2rem',
+                    fontWeight: '700',
+                    color: '#fff',
+                    marginBottom: '0.5rem'
+                }}>
+                    Welcome back, {admin?.name || 'Admin'}!
+                </h1>
+                <p style={{
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    fontSize: '1rem'
+                }}>
+                    Select a section to manage
+                </p>
+            </div>
 
             <div style={{
                 display: 'grid',
@@ -81,5 +115,13 @@ export default function AdminPage() {
                 ))}
             </div>
         </div>
+    );
+}
+
+export default function AdminPage() {
+    return (
+        <AdminLayout>
+            <AdminDashboardContent />
+        </AdminLayout>
     );
 }

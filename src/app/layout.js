@@ -25,6 +25,11 @@ export const metadata = {
   title: "Department of Information Technology | A.P. Shah Institute of Technology",
   description: "Welcome to the Department of Information Technology at A.P. Shah Institute of Technology, Thane. Discover our programs, events, achievements, and innovation.",
   keywords: "IT Department, APSIT, A.P. Shah Institute of Technology, Information Technology, Engineering, Thane",
+  icons: {
+    icon: '/logo.jpg',
+    shortcut: '/logo.jpg',
+    apple: '/logo.jpg',
+  },
 };
 
 export default function RootLayout({ children }) {

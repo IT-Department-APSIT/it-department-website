@@ -9,6 +9,7 @@ import {
   Laptop, GraduationCap, Target, Rocket,
   ChevronLeft, ChevronRight
 } from 'lucide-react';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabaseClient';
 
 // Animation variants
@@ -704,7 +705,6 @@ function GallerySection() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedMedia, setSelectedMedia] = useState(null);
-  const [showFullGallery, setShowFullGallery] = useState(false);
 
   // Number of items to show in preview
   const PREVIEW_COUNT = 8;
@@ -735,20 +735,16 @@ function GallerySection() {
     return /\.(mp4|webm|mov|avi|mkv)$/i.test(url);
   };
 
-  // Close modals on ESC
+  // Close lightbox on ESC
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === 'Escape') {
-        if (selectedMedia) {
-          setSelectedMedia(null);
-        } else if (showFullGallery) {
-          setShowFullGallery(false);
-        }
+      if (e.key === 'Escape' && selectedMedia) {
+        setSelectedMedia(null);
       }
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
-  }, [selectedMedia, showFullGallery]);
+  }, [selectedMedia]);
 
   // Don't render if loading or no data
   if (loading) {
@@ -824,16 +820,6 @@ function GallerySection() {
               Glimpses of our vibrant department life, events, and achievements.
             </motion.p>
           </div>
-          {hasMore && (
-            <motion.button
-              variants={fadeInUp}
-              className="gallery-view-more-btn"
-              onClick={() => setShowFullGallery(true)}
-            >
-              View All ({galleryImages.length})
-              <ArrowRight size={18} />
-            </motion.button>
-          )}
         </motion.div>
 
         {/* Pinterest Masonry Grid - Preview */}
@@ -847,7 +833,7 @@ function GallerySection() {
           {previewImages.map((item, index) => renderGalleryItem(item, index))}
         </motion.div>
 
-        {/* View More button (mobile/centered) */}
+        {/* View Full Gallery Link */}
         {hasMore && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -855,54 +841,13 @@ function GallerySection() {
             viewport={{ once: true }}
             className="gallery-view-more-center"
           >
-            <button
-              className="btn btn-secondary"
-              onClick={() => setShowFullGallery(true)}
-            >
+            <Link href="/gallery" className="btn btn-secondary">
               View Full Gallery
               <ArrowRight size={18} />
-            </button>
+            </Link>
           </motion.div>
         )}
       </div>
-
-      {/* Full Gallery Modal */}
-      <AnimatePresence>
-        {showFullGallery && (
-          <motion.div
-            className="gallery-modal-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowFullGallery(false)}
-          >
-            <motion.div
-              className="gallery-modal-content"
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="gallery-modal-header">
-                <h2>Media Gallery</h2>
-                <button
-                  className="gallery-modal-close"
-                  onClick={() => setShowFullGallery(false)}
-                  aria-label="Close"
-                >
-                  ✕
-                </button>
-              </div>
-              <div className="gallery-modal-body">
-                <div className="masonry-grid masonry-grid-modal">
-                  {galleryImages.map((item, index) => renderGalleryItem(item, index, true))}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Lightbox Modal for Individual Media */}
       <AnimatePresence>

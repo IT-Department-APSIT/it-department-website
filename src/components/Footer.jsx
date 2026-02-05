@@ -6,14 +6,13 @@ export default function Footer() {
         <footer className="footer">
             <div className="container">
                 <div className="footer-grid">
-                    <div>
+                    <div className="footer-brand-section">
                         <div className="footer-brand">
                             <img src="/logo.jpg" alt="IT Department" />
                             <span className="footer-brand-text">IT Department</span>
                         </div>
                         <p className="footer-description">
-                            Department of Information Technology at A.P. Shah Institute of Technology,
-                            Thane. Building future-ready IT professionals through excellence in education,
+                            Building future-ready IT professionals through excellence in education,
                             innovation, and industry collaboration.
                         </p>
                         <div className="footer-social">
@@ -25,38 +24,29 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div>
+                    <div className="footer-links-section">
                         <h4 className="footer-title">Quick Links</h4>
                         <nav className="footer-links">
                             <Link href="/" className="footer-link">Home</Link>
                             <Link href="/events" className="footer-link">Events</Link>
+                            <Link href="/gallery" className="footer-link">Gallery</Link>
                             <Link href="/about" className="footer-link">About Us</Link>
                             <Link href="/itsa" className="footer-link">ITSA</Link>
                             <Link href="/admin" className="footer-link">Admin</Link>
                         </nav>
                     </div>
 
-                    <div>
-                        <h4 className="footer-title">Programs</h4>
-                        <nav className="footer-links">
-                            <a href="#" className="footer-link">B.Tech IT</a>
-                            <a href="#" className="footer-link">Value Added Courses</a>
-                            <a href="#" className="footer-link">Workshops</a>
-                            <a href="#" className="footer-link">Certifications</a>
-                        </nav>
-                    </div>
-
-                    <div>
+                    <div className="footer-contact-section">
                         <h4 className="footer-title">Contact</h4>
                         <div className="footer-links">
-                            <a href="mailto:it@apsit.edu.in" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <a href="mailto:it@apsit.edu.in" className="footer-link footer-contact-item">
                                 <Mail size={16} /> it@apsit.edu.in
                             </a>
-                            <a href="tel:+912225974747" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <a href="tel:+912225974747" className="footer-link footer-contact-item">
                                 <Phone size={16} /> +91 22 2597 4747
                             </a>
-                            <span className="footer-link" style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                                <MapPin size={16} style={{ flexShrink: 0, marginTop: 2 }} />
+                            <span className="footer-link footer-contact-item footer-address">
+                                <MapPin size={16} />
                                 Kasarvadavali, Ghodbunder Road, Thane (W) - 400615
                             </span>
                         </div>
@@ -65,7 +55,6 @@ export default function Footer() {
 
                 <div className="footer-bottom">
                     <p>&copy; {new Date().getFullYear()} Department of Information Technology, A.P. Shah Institute of Technology. All rights reserved.</p>
-                    <Link href="/admin" className="footer-link" style={{ fontSize: '0.75rem', opacity: 0.6 }}>Admin</Link>
                 </div>
             </div>
         </footer>

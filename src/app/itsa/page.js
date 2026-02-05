@@ -36,6 +36,12 @@ const committeeMembers = [
     { name: "Rinkal Mishra", role: "Publicity Head", image: "/assets/itsa-team/Rinkal-Mishra.jpg" },
     { name: "Rutuja Gujar", role: "Literature Co-Head", image: "/assets/itsa-team/rujuta-gujar.jpg" },
 ];
+const facultyCoordinators = [
+    { name: "Prof. Shafaque Fatma Syed", role: "Faculty Co-ordinator", image: "/facultyimages/shafaque.png" },
+    { name: "Prof. Sonal Jain", role: "Faculty Co-ordinator", image: "/facultyimages/sonalj.png" },
+    { name: "Prof. Shweta Mahajan", role: "Faculty Co-ordinator", image: "/facultyimages/shweta.png" },
+];
+
 
 const activities = [
     {
@@ -94,15 +100,16 @@ export default function ITSAPage() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={staggerContainer}
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: '1fr 1fr',
-                            gap: 48,
-                            alignItems: 'center'
-                        }}
+                        className="itsa-about-grid"
                     >
                         <motion.div variants={fadeInUp}>
-                            <h2 className="section-title" style={{ color: 'white' }}>What is ITSA?</h2>
+                            <h2 className="section-title" style={{
+                                color: 'white',
+                                fontFamily: 'var(--font-playfair), Georgia, serif',
+                                fontStyle: 'italic',
+                                fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+                                letterSpacing: '1px'
+                            }}>What is ITSA?</h2>
                             <p className="section-subtitle" style={{ marginBottom: 24, color: 'rgba(255,255,255,0.9)' }}>
                                 The bridge between academic learning and professional excellence.
                             </p>
@@ -119,7 +126,7 @@ export default function ITSAPage() {
                             </p>
                             <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
                                 <a
-                                    href="#"
+                                    href="https://www.instagram.com/itsa_apsit/"
                                     style={{
                                         width: 44,
                                         height: 44,
@@ -143,7 +150,7 @@ export default function ITSAPage() {
                                     <Instagram size={22} />
                                 </a>
                                 <a
-                                    href="#"
+                                    href="https://www.linkedin.com/company/itsaapsit/posts/?feedView=all"
                                     style={{
                                         width: 44,
                                         height: 44,
@@ -209,11 +216,7 @@ export default function ITSAPage() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={staggerContainer}
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                            gap: 24
-                        }}
+                        className="itsa-activities-grid"
                     >
                         {activities.map((activity, index) => (
                             <motion.div
@@ -264,12 +267,7 @@ export default function ITSAPage() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={staggerContainer}
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: '1.2fr 1fr',
-                            gap: 60,
-                            alignItems: 'center'
-                        }}
+                        className="itsa-hod-grid"
                     >
                         <motion.div variants={fadeInUp}>
                             <div style={{
@@ -400,11 +398,7 @@ export default function ITSAPage() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={staggerContainer}
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(4, 1fr)',
-                            gap: 24
-                        }}
+                        className="itsa-committee-grid"
                     >
                         {committeeMembers.map((member, index) => (
                             <motion.div
@@ -514,60 +508,153 @@ export default function ITSAPage() {
                 </div>
             </section>
 
+            {/* Faculty Co-ordinators */}
+            <section className="section section-alt" style={{ paddingTop: '40px' }}>
+                <div className="container">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={staggerContainer}
+                        style={{ textAlign: 'center' }}
+                    >
+                        <motion.h2 variants={fadeInUp} className="section-title center">
+                            <Users size={32} style={{ display: 'inline', marginRight: 12, verticalAlign: 'middle', color: 'var(--secondary)' }} />
+                            Faculty Co-ordinators
+                        </motion.h2>
+                        <motion.p variants={fadeInUp} className="section-subtitle center">
+                            Guidance and mentorship for ITSA activities and initiatives.
+                        </motion.p>
+                    </motion.div>
+
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={staggerContainer}
+                        className="itsa-faculty-grid"
+                    >
+                        {facultyCoordinators.map((member, index) => (
+                            <motion.div
+                                key={index}
+                                variants={fadeInUp}
+                                whileHover={{
+                                    y: -10,
+                                    transition: { duration: 0.3 }
+                                }}
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    textAlign: 'center',
+                                    padding: '32px 20px 28px',
+                                    borderRadius: 20,
+                                    background: 'var(--surface)',
+                                    border: '1px solid var(--border)',
+                                    position: 'relative',
+                                    boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                                    transition: 'box-shadow 0.3s ease',
+                                }}
+                                onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 20px 50px rgba(0,0,0,0.12)'}
+                                onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)'}
+                            >
+                                <div style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    height: 80,
+                                    background: 'linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(251,191,36,0.05) 100%)',
+                                    borderRadius: '20px 20px 50% 50%',
+                                }} />
+
+                                <div style={{
+                                    position: 'relative',
+                                    width: 130,
+                                    height: 130,
+                                    margin: '0 auto 20px',
+                                    borderRadius: '50%',
+                                    padding: 4,
+                                    background: 'linear-gradient(135deg, #f97316 0%, #fbbf24 50%, #f59e0b 100%)',
+                                    boxShadow: '0 8px 30px rgba(249,115,22,0.35)',
+                                }}>
+                                    <div style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        borderRadius: '50%',
+                                        overflow: 'hidden',
+                                        background: 'var(--surface)',
+                                    }}>
+                                        <img
+                                            src={member.image}
+                                            alt={member.name}
+                                            style={{
+                                                width: '100%',
+                                                height: '100%',
+                                                objectFit: 'cover',
+                                                objectPosition: 'top center',
+                                                transition: 'transform 0.4s ease',
+                                            }}
+                                            onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
+                                            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                                        />
+                                    </div>
+                                </div>
+
+                                <h3 style={{
+                                    fontSize: '1.15rem',
+                                    fontWeight: 700,
+                                    color: 'var(--text-primary)',
+                                    marginBottom: 10,
+                                    letterSpacing: '0.2px',
+                                    minHeight: '2.5em',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                    {member.name}
+                                </h3>
+
+                                <div style={{
+                                    display: 'inline-block',
+                                    padding: '8px 18px',
+                                    background: 'linear-gradient(135deg, #f97316 0%, #f59e0b 100%)',
+                                    borderRadius: 25,
+                                    color: 'white',
+                                    fontSize: '0.78rem',
+                                    fontWeight: 600,
+                                    letterSpacing: '0.5px',
+                                    textTransform: 'uppercase',
+                                    boxShadow: '0 4px 15px rgba(249,115,22,0.3)',
+                                    marginTop: 'auto'
+                                }}>
+                                    {member.role}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
+            </section>
+
             {/* Podcast Section with Instagram Reels */}
             <motion.section
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                style={{
-                    width: '100%',
-                    position: 'relative',
-                    backgroundColor: '#4a7c8a',
-                    overflow: 'hidden'
-                }}
+                className="itsa-podcast-section"
             >
                 {/* Full Poster Image */}
                 <img
                     src="/assets/posters/podcast-poster.png"
                     alt="ITSA Podcast"
-                    style={{
-                        width: '100%',
-                        height: 'auto',
-                        display: 'block'
-                    }}
+                    className="itsa-podcast-poster"
                 />
 
-                {/* Instagram Reels Overlay */}
-                <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'flex-end',
-                    padding: '0 5%'
-                }}>
-                    <div style={{
-                        display: 'flex',
-                        gap: 24,
-                        alignItems: 'center'
-                    }}>
+                {/* Instagram Reels Overlay - Hidden on mobile */}
+                <div className="itsa-podcast-overlay">
+                    <div className="itsa-podcast-reels">
                         {/* Instagram Reel Embed 1 */}
-                        <div style={{
-                            width: '320px',
-                            height: '420px',
-                            borderRadius: '16px',
-                            overflow: 'hidden',
-                            boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-                            background: 'rgba(255,255,255,0.1)',
-                            backdropFilter: 'blur(10px)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
+                        <div className="itsa-reel-container">
                             <iframe
                                 src="https://www.instagram.com/reel/DHTCNOQITVt/embed/"
                                 width="320"
@@ -576,26 +663,11 @@ export default function ITSAPage() {
                                 scrolling="no"
                                 allowtransparency="true"
                                 allow="encrypted-media"
-                                style={{
-                                    border: 'none',
-                                    borderRadius: '16px'
-                                }}
                             />
                         </div>
 
                         {/* Instagram Reel Embed 2 */}
-                        <div style={{
-                            width: '320px',
-                            height: '420px',
-                            borderRadius: '16px',
-                            overflow: 'hidden',
-                            boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-                            background: 'rgba(255,255,255,0.1)',
-                            backdropFilter: 'blur(10px)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
+                        <div className="itsa-reel-container">
                             <iframe
                                 src="https://www.instagram.com/reel/DGxgUroIFgV/embed/"
                                 width="320"
@@ -604,10 +676,6 @@ export default function ITSAPage() {
                                 scrolling="no"
                                 allowtransparency="true"
                                 allow="encrypted-media"
-                                style={{
-                                    border: 'none',
-                                    borderRadius: '16px'
-                                }}
                             />
                         </div>
                     </div>
@@ -644,19 +712,9 @@ export default function ITSAPage() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
+                className="itsa-blueback-section"
                 style={{
-                    width: '100%',
-                    padding: '80px 0',
-                    margin: 0,
-                    position: 'relative',
-                    backgroundImage: 'url(/assets/posters/blueback.png)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    minHeight: '600px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+                    backgroundImage: 'url(/assets/posters/blueback.png)'
                 }}
             >
                 {/* Blue Tinted Transparent Panel */}
@@ -666,16 +724,7 @@ export default function ITSAPage() {
                     alignItems: 'center',
                     padding: '0 20px'
                 }}>
-                    <div style={{
-                        width: '100%',
-                        maxWidth: '1000px',
-                        background: 'rgba(30, 58, 138, 0.85)',
-                        backdropFilter: 'blur(10px)',
-                        borderRadius: '24px',
-                        padding: '48px 56px',
-                        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)'
-                    }}>
+                    <div className="itsa-blueback-panel">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
