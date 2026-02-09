@@ -19,6 +19,7 @@ export default function AdminEventsManagePage() {
         event_type: '',
         event_date: '',
         venue: '',
+        registration_url: '',
         poster_url: '',
         posterFile: null,
         posterPreview: '',
@@ -159,6 +160,7 @@ export default function AdminEventsManagePage() {
                 event_type: formData.event_type.trim(),
                 event_date: formData.event_date || null,
                 venue: formData.venue.trim(),
+                registration_url: formData.registration_url.trim(),
                 poster_url: posterUrl,
                 media_urls: mediaUrls,
                 updated_at: new Date().toISOString()
@@ -200,6 +202,7 @@ export default function AdminEventsManagePage() {
             event_type: event.event_type || '',
             event_date: event.event_date || '',
             venue: event.venue || '',
+            registration_url: event.registration_url || '',
             poster_url: event.poster_url || '',
             posterFile: null,
             posterPreview: event.poster_url || '',
@@ -236,6 +239,7 @@ export default function AdminEventsManagePage() {
             event_type: '',
             event_date: '',
             venue: '',
+            registration_url: '',
             poster_url: '',
             posterFile: null,
             posterPreview: '',
@@ -425,6 +429,27 @@ export default function AdminEventsManagePage() {
                                             value={formData.venue}
                                             onChange={(e) => setFormData(prev => ({ ...prev, venue: e.target.value }))}
                                             placeholder="Enter venue"
+                                            style={{
+                                                width: '100%',
+                                                padding: '0.75rem',
+                                                background: 'rgba(255,255,255,0.1)',
+                                                border: '1px solid rgba(255,255,255,0.2)',
+                                                borderRadius: '8px',
+                                                color: '#fff',
+                                                fontSize: '1rem'
+                                            }}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label style={{ color: '#fff', display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
+                                            Registration URL (Optional)
+                                        </label>
+                                        <input
+                                            type="url"
+                                            value={formData.registration_url}
+                                            onChange={(e) => setFormData(prev => ({ ...prev, registration_url: e.target.value }))}
+                                            placeholder="https://example.com/register"
                                             style={{
                                                 width: '100%',
                                                 padding: '0.75rem',

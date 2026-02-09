@@ -223,6 +223,41 @@ export default function EventDetailPage() {
                                 )}
                             </div>
 
+                            {/* Register Now Button */}
+                            {event.registration_url && (
+                                <a
+                                    href={event.registration_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                        display: 'block',
+                                        width: '100%',
+                                        padding: '1rem',
+                                        background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
+                                        color: '#1a1a2e',
+                                        textAlign: 'center',
+                                        textDecoration: 'none',
+                                        borderRadius: '12px',
+                                        fontSize: '1.1rem',
+                                        fontWeight: 700,
+                                        transition: 'all 0.3s ease',
+                                        border: 'none',
+                                        boxShadow: '0 4px 15px rgba(251,191,36,0.3)',
+                                        cursor: 'pointer'
+                                    }}
+                                    onMouseOver={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(-2px)';
+                                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(251,191,36,0.4)';
+                                    }}
+                                    onMouseOut={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(251,191,36,0.3)';
+                                    }}
+                                >
+                                    Register Now
+                                </a>
+                            )}
+
                             {/* Description */}
                             {event.description && (
                                 <div>

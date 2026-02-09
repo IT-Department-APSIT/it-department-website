@@ -142,27 +142,31 @@ export default function EventsPage() {
                                         </h3>
 
                                         {event.description && (
-                                            <p className="event-description">
-                                                {event.description.length > 200
-                                                    ? event.description.substring(0, 200) + '...'
-                                                    : event.description}
+                                            <p className="event-description" style={{
+                                                display: '-webkit-box',
+                                                WebkitLineClamp: 3,
+                                                WebkitBoxOrient: 'vertical',
+                                                overflow: 'hidden',
+                                                textOverflow: 'ellipsis'
+                                            }}>
+                                                {event.description}
                                             </p>
                                         )}
 
-                                        <div className="event-meta">
-                                            {event.event_date && (
-                                                <span className="event-meta-item">
-                                                    <Calendar size={18} color="var(--secondary)" /> {formatDate(event.event_date)}
-                                                </span>
-                                            )}
-                                            {event.venue && (
-                                                <span className="event-meta-item">
-                                                    <MapPin size={18} color="var(--secondary)" /> {event.venue}
-                                                </span>
-                                            )}
-                                        </div>
+                                        <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                            <div className="event-meta">
+                                                {event.event_date && (
+                                                    <span className="event-meta-item">
+                                                        <Calendar size={18} color="var(--secondary)" /> {formatDate(event.event_date)}
+                                                    </span>
+                                                )}
+                                                {event.venue && (
+                                                    <span className="event-meta-item">
+                                                        <MapPin size={18} color="var(--secondary)" /> {event.venue}
+                                                    </span>
+                                                )}
+                                            </div>
 
-                                        <div style={{ marginTop: 'auto' }}>
                                             <button
                                                 className="btn btn-primary"
                                                 onClick={(e) => {
