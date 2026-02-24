@@ -52,7 +52,7 @@ const activities = [
     {
         icon: <Lightbulb size={28} />,
         title: 'Hackathons',
-        description: 'Organizing and participating in inter-college and national-level hackathons.',
+        description: 'Streamlining departmental hackathon operations to deliver seamless, high-impact innovation events.',
     },
     {
         icon: <BookOpen size={28} />,
@@ -76,16 +76,10 @@ const activities = [
     },
 ];
 
-const highlights = [
-    { number: '12+', label: 'Events per Year' },
-    { number: '500+', label: 'Active Members' },
-    { number: '25+', label: 'Workshops Conducted' },
-    { number: '10+', label: 'Industry Partners' },
-];
 
 export default function ITSAPage() {
     return (
-        <>
+        <div style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
             {/* Page Header */}
             <div className="page-header itsa-banner">
                 <div className="container">
@@ -203,7 +197,6 @@ export default function ITSAPage() {
                         style={{ textAlign: 'center' }}
                     >
                         <motion.h2 variants={fadeInUp} className="section-title center">
-                            <Calendar size={32} style={{ display: 'inline', marginRight: 12, verticalAlign: 'middle', color: 'var(--secondary)' }} />
                             What We Do
                         </motion.h2>
                         <motion.p variants={fadeInUp} className="section-subtitle center">
@@ -794,6 +787,6 @@ export default function ITSAPage() {
                     </div>
                 </div>
             </motion.section>
-        </>
+        </div>
     );
 }

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import {
-    Target, Eye, Award, Users, BookOpen, Building2,
+    Target, Eye, Users, BookOpen, Building2,
     GraduationCap, Mail, Phone, Linkedin,
     Monitor, Server, Cpu, Database, ExternalLink, ArrowLeft
 } from 'lucide-react';
@@ -218,13 +218,6 @@ const labs = [
     { name: 'Database Lab', icon: <Database size={32} />, systems: 40, description: 'Dedicated lab for database design, management, and big data analytics' },
 ];
 
-const achievements = [
-    { year: '2024', title: 'NAAC A+ Accreditation', description: 'Department contributed significantly to institutional accreditation' },
-    { year: '2024', title: 'Smart India Hackathon Winners', description: '3 teams qualified for national finals, 1 team won' },
-    { year: '2023', title: '100% Placement Record', description: 'All eligible students placed in top companies' },
-    { year: '2023', title: 'Research Excellence Award', description: '15+ papers published in Scopus-indexed journals' },
-    { year: '2022', title: 'Best IT Department Award', description: 'Recognized by University of Mumbai' },
-];
 
 export default function AboutPage() {
     return (
@@ -408,91 +401,7 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Achievements Timeline */}
-            <section className="section section-alt">
-                <div className="container">
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={staggerContainer}
-                        style={{ textAlign: 'center' }}
-                    >
-                        <motion.h2 variants={fadeInUp} className="section-title center">
-                            <Award size={32} style={{ display: 'inline', marginRight: 12, verticalAlign: 'middle', color: 'var(--accent)' }} />
-                            Achievements
-                        </motion.h2>
-                        <motion.p variants={fadeInUp} className="section-subtitle center">
-                            Milestones that mark our journey of excellence.
-                        </motion.p>
-                    </motion.div>
 
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={staggerContainer}
-                        style={{ maxWidth: 800, margin: '0 auto' }}
-                    >
-                        {achievements.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                variants={fadeInUp}
-                                style={{
-                                    display: 'flex',
-                                    gap: 24,
-                                    marginBottom: 24,
-                                    position: 'relative',
-                                }}
-                            >
-                                <div style={{
-                                    width: 80,
-                                    flexShrink: 0,
-                                    textAlign: 'right',
-                                    paddingTop: 4,
-                                }}>
-                                    <span style={{
-                                        fontWeight: 800,
-                                        fontSize: '1.25rem',
-                                        color: 'var(--primary)',
-                                    }}>
-                                        {item.year}
-                                    </span>
-                                </div>
-                                <div style={{
-                                    width: 16,
-                                    height: 16,
-                                    borderRadius: '50%',
-                                    background: 'var(--secondary)',
-                                    flexShrink: 0,
-                                    marginTop: 8,
-                                    position: 'relative',
-                                }}>
-                                    {index !== achievements.length - 1 && (
-                                        <div style={{
-                                            position: 'absolute',
-                                            top: 16,
-                                            left: '50%',
-                                            transform: 'translateX(-50%)',
-                                            width: 2,
-                                            height: 80,
-                                            background: 'var(--border)',
-                                        }} />
-                                    )}
-                                </div>
-                                <div className="card" style={{ flex: 1, padding: 20 }}>
-                                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
-                                        {item.title}
-                                    </h3>
-                                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                                        {item.description}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
         </>
     );
 }

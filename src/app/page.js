@@ -54,34 +54,25 @@ const slideVariants = {
   })
 };
 
+// Hero images defined outside component to avoid re-creation on each render
+const HERO_IMAGES = [
+  { id: 1, image_url: '/assets/hero-pics/IMG-20251001-WA0007.jpg', alt_text: 'Hero image 1' },
+  { id: 2, image_url: '/assets/hero-pics/ss3.jpeg', alt_text: 'Hero image 2' },
+];
+
 // Hero Slider Section
 function HeroSection() {
-  const [images, setImages] = useState([]);
+  const images = HERO_IMAGES;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState({});
 
-  // Fetch images from Supabase
+  // Preload all hero images into browser cache on mount
   useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('hero_images')
-          .select('*')
-          .order('display_order', { ascending: true });
-
-        if (error) throw error;
-        setImages(data || []);
-      } catch (error) {
-        console.error('Error fetching hero images:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchImages();
+    images.forEach((img) => {
+      const preload = new Image();
+      preload.src = img.image_url;
+    });
   }, []);
 
   // Auto-play functionality
@@ -111,25 +102,6 @@ function HeroSection() {
     setCurrentIndex((prev) => (prev + 1) % images.length);
   }, [images.length]);
 
-  // Handle image load
-  const handleImageLoad = (id) => {
-    setImageLoaded(prev => ({ ...prev, [id]: true }));
-  };
-
-  // Loading skeleton
-  if (loading) {
-    return (
-      <section className="hero-slider">
-        <div className="hero-slider-loading">
-          <div className="hero-loading-shimmer"></div>
-          <div className="hero-loading-content">
-            <div className="hero-loading-spinner"></div>
-            <p>Loading amazing moments...</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   // Fallback if no images
   if (images.length === 0) {
@@ -166,18 +138,12 @@ function HeroSection() {
           exit="exit"
           className="hero-slide"
         >
-          {/* Skeleton while image loads */}
-          {!imageLoaded[images[currentIndex]?.id] && (
-            <div className="hero-slide-skeleton">
-              <div className="hero-loading-spinner"></div>
-            </div>
-          )}
           <img
             src={images[currentIndex]?.image_url}
             alt={images[currentIndex]?.alt_text || 'Hero image'}
             className="hero-slide-image"
-            onLoad={() => handleImageLoad(images[currentIndex]?.id)}
-            style={{ opacity: imageLoaded[images[currentIndex]?.id] ? 1 : 0 }}
+            loading="eager"
+            fetchPriority="high"
           />
         </motion.div>
       </AnimatePresence>
@@ -582,6 +548,14 @@ function HallOfFameSection() {
     setCurrentIndex(index);
   }, []);
 
+  const goToPrevious = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + honorees.length) % honorees.length);
+  }, [honorees.length]);
+
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % honorees.length);
+  }, [honorees.length]);
+
   // Don't render if loading or no data
   if (loading) {
     return (
@@ -696,6 +670,26 @@ function HallOfFameSection() {
           )}
         </motion.div>
       </div>
+
+      {/* Navigation Arrows */}
+      {honorees.length > 1 && (
+        <>
+          <button
+            className="hof-arrow hof-arrow-left"
+            onClick={goToPrevious}
+            aria-label="Previous honoree"
+          >
+            <ChevronLeft size={28} />
+          </button>
+          <button
+            className="hof-arrow hof-arrow-right"
+            onClick={goToNext}
+            aria-label="Next honoree"
+          >
+            <ChevronRight size={28} />
+          </button>
+        </>
+      )}
     </section>
   );
 }

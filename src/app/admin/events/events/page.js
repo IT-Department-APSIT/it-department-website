@@ -109,6 +109,13 @@ export default function AdminEventsManagePage() {
         }));
     };
 
+    const removeExistingMedia = (index) => {
+        setFormData(prev => ({
+            ...prev,
+            media_urls: prev.media_urls.filter((_, i) => i !== index)
+        }));
+    };
+
     const uploadFile = async (file, bucket) => {
         const fileExt = file.name.split('.').pop();
         const fileName = `${bucket}_${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
@@ -542,6 +549,119 @@ export default function AdminEventsManagePage() {
                                 <label style={{ color: '#fff', display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
                                     Event Media (Images/Videos)
                                 </label>
+
+                                {/* Existing Uploaded Media */}
+                                {formData.media_urls && formData.media_urls.length > 0 && (
+                                    <div style={{ marginBottom: '1.5rem' }}>
+                                        <div style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                            marginBottom: '0.75rem'
+                                        }}>
+                                            <p style={{
+                                                color: 'rgba(255,255,255,0.7)',
+                                                margin: 0,
+                                                fontSize: '0.9rem',
+                                                fontWeight: '500'
+                                            }}>
+                                                Uploaded Media ({formData.media_urls.length} file{formData.media_urls.length !== 1 ? 's' : ''})
+                                            </p>
+                                        </div>
+                                        <div style={{
+                                            display: 'grid',
+                                            gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+                                            gap: '1rem',
+                                            padding: '1rem',
+                                            background: 'rgba(255,255,255,0.03)',
+                                            borderRadius: '12px',
+                                            border: '1px solid rgba(255,255,255,0.08)'
+                                        }}>
+                                            {formData.media_urls.map((url, idx) => {
+                                                const isVideo = url.match(/\.(mp4|webm|ogg|mov)$/i);
+                                                return (
+                                                    <div key={`existing-${idx}`} style={{
+                                                        position: 'relative',
+                                                        borderRadius: '8px',
+                                                        overflow: 'hidden',
+                                                        border: '1px solid rgba(255,255,255,0.1)',
+                                                        transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+                                                    }}
+                                                        onMouseOver={(e) => {
+                                                            e.currentTarget.style.transform = 'scale(1.03)';
+                                                            e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.4)';
+                                                        }}
+                                                        onMouseOut={(e) => {
+                                                            e.currentTarget.style.transform = 'scale(1)';
+                                                            e.currentTarget.style.boxShadow = 'none';
+                                                        }}
+                                                    >
+                                                        {isVideo ? (
+                                                            <video
+                                                                src={url}
+                                                                style={{
+                                                                    width: '100%',
+                                                                    height: '150px',
+                                                                    objectFit: 'cover',
+                                                                    display: 'block'
+                                                                }}
+                                                            />
+                                                        ) : (
+                                                            <img
+                                                                src={url}
+                                                                alt={`Existing media ${idx + 1}`}
+                                                                style={{
+                                                                    width: '100%',
+                                                                    height: '150px',
+                                                                    objectFit: 'cover',
+                                                                    display: 'block'
+                                                                }}
+                                                            />
+                                                        )}
+                                                        {/* Delete overlay */}
+                                                        <button
+                                                            type="button"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                removeExistingMedia(idx);
+                                                            }}
+                                                            title="Remove this media"
+                                                            style={{
+                                                                position: 'absolute',
+                                                                top: '0.4rem',
+                                                                right: '0.4rem',
+                                                                background: 'rgba(239, 68, 68, 0.9)',
+                                                                border: 'none',
+                                                                borderRadius: '50%',
+                                                                width: '28px',
+                                                                height: '28px',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                cursor: 'pointer',
+                                                                color: '#fff',
+                                                                transition: 'background 0.2s ease, transform 0.2s ease',
+                                                                boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
+                                                            }}
+                                                            onMouseOver={(e) => {
+                                                                e.currentTarget.style.background = 'rgba(220, 38, 38, 1)';
+                                                                e.currentTarget.style.transform = 'scale(1.15)';
+                                                            }}
+                                                            onMouseOut={(e) => {
+                                                                e.currentTarget.style.background = 'rgba(239, 68, 68, 0.9)';
+                                                                e.currentTarget.style.transform = 'scale(1)';
+                                                            }}
+                                                        >
+                                                            <Trash2 size={14} />
+                                                        </button>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Upload new media */}
                                 <div style={{
                                     width: '100%',
                                     minHeight: '150px',
@@ -559,7 +679,7 @@ export default function AdminEventsManagePage() {
                                 >
                                     <Upload size={40} color="rgba(255,255,255,0.4)" />
                                     <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', textAlign: 'center' }}>
-                                        Click to upload media files (multiple allowed)
+                                        Click to upload {formData.media_urls && formData.media_urls.length > 0 ? 'more' : ''} media files (multiple allowed)
                                     </p>
                                     <input
                                         id="media-upload"
@@ -571,64 +691,79 @@ export default function AdminEventsManagePage() {
                                     />
                                 </div>
 
-                                {/* Media Previews */}
+                                {/* New Media Previews */}
                                 {formData.mediaPreviews.length > 0 && (
-                                    <div style={{
-                                        display: 'grid',
-                                        gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-                                        gap: '1rem',
-                                        marginTop: '1rem'
-                                    }}>
-                                        {formData.mediaPreviews.map((item, idx) => (
-                                            <div key={idx} style={{ position: 'relative' }}>
-                                                {item.type.startsWith('image/') ? (
-                                                    <img
-                                                        src={item.preview}
-                                                        alt={`Media ${idx + 1}`}
-                                                        style={{
-                                                            width: '100%',
-                                                            height: '150px',
-                                                            objectFit: 'cover',
-                                                            borderRadius: '8px'
+                                    <div style={{ marginTop: '1rem' }}>
+                                        <p style={{
+                                            color: 'rgba(255,255,255,0.7)',
+                                            margin: '0 0 0.75rem 0',
+                                            fontSize: '0.9rem',
+                                            fontWeight: '500'
+                                        }}>
+                                            New Media to Upload ({formData.mediaPreviews.length} file{formData.mediaPreviews.length !== 1 ? 's' : ''})
+                                        </p>
+                                        <div style={{
+                                            display: 'grid',
+                                            gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+                                            gap: '1rem'
+                                        }}>
+                                            {formData.mediaPreviews.map((item, idx) => (
+                                                <div key={idx} style={{
+                                                    position: 'relative',
+                                                    borderRadius: '8px',
+                                                    overflow: 'hidden',
+                                                    border: '1px solid rgba(251, 191, 36, 0.3)'
+                                                }}>
+                                                    {item.type.startsWith('image/') ? (
+                                                        <img
+                                                            src={item.preview}
+                                                            alt={`Media ${idx + 1}`}
+                                                            style={{
+                                                                width: '100%',
+                                                                height: '150px',
+                                                                objectFit: 'cover',
+                                                                display: 'block'
+                                                            }}
+                                                        />
+                                                    ) : (
+                                                        <video
+                                                            src={item.preview}
+                                                            style={{
+                                                                width: '100%',
+                                                                height: '150px',
+                                                                objectFit: 'cover',
+                                                                display: 'block'
+                                                            }}
+                                                        />
+                                                    )}
+                                                    <button
+                                                        type="button"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            removeMedia(idx);
                                                         }}
-                                                    />
-                                                ) : (
-                                                    <video
-                                                        src={item.preview}
                                                         style={{
-                                                            width: '100%',
-                                                            height: '150px',
-                                                            objectFit: 'cover',
-                                                            borderRadius: '8px'
+                                                            position: 'absolute',
+                                                            top: '0.4rem',
+                                                            right: '0.4rem',
+                                                            background: 'rgba(239, 68, 68, 0.9)',
+                                                            border: 'none',
+                                                            borderRadius: '50%',
+                                                            width: '28px',
+                                                            height: '28px',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            cursor: 'pointer',
+                                                            color: '#fff',
+                                                            boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
                                                         }}
-                                                    />
-                                                )}
-                                                <button
-                                                    type="button"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        removeMedia(idx);
-                                                    }}
-                                                    style={{
-                                                        position: 'absolute',
-                                                        top: '0.5rem',
-                                                        right: '0.5rem',
-                                                        background: 'rgba(239, 68, 68, 0.9)',
-                                                        border: 'none',
-                                                        borderRadius: '50%',
-                                                        width: '24px',
-                                                        height: '24px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        cursor: 'pointer',
-                                                        color: '#fff'
-                                                    }}
-                                                >
-                                                    <X size={16} />
-                                                </button>
-                                            </div>
-                                        ))}
+                                                    >
+                                                        <X size={16} />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
                             </div>
