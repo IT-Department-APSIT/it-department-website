@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Image from 'next/image';
 import {
     Target, Eye, Users, BookOpen, Building2,
     GraduationCap, Mail, Phone, Linkedin,
@@ -97,9 +98,11 @@ const FacultyCard = ({ member }) => {
                             boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
                             background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
                         }}>
-                            <img
+                            <Image
                                 src={`/facultyimages/${member.image}`}
                                 alt={member.name}
+                                width={120}
+                                height={120}
                                 style={{
                                     width: '100%',
                                     height: '100%',
@@ -254,9 +257,12 @@ export default function AboutPage() {
                                 cursor: 'pointer'
                             }}
                         >
-                            <img
+                            <Image
                                 src="/assets/posters/it-dept-highlights.jpg"
                                 alt="IT Department Highlights"
+                                width={1920}
+                                height={1080}
+                                sizes="100vw"
                                 style={{
                                     width: '100%',
                                     height: 'auto',
@@ -276,9 +282,12 @@ export default function AboutPage() {
                                 cursor: 'pointer'
                             }}
                         >
-                            <img
+                            <Image
                                 src="/assets/posters/it-dept-poster.jpeg"
                                 alt="IT Department Poster"
+                                width={1920}
+                                height={1080}
+                                sizes="100vw"
                                 style={{
                                     width: '100%',
                                     height: 'auto',

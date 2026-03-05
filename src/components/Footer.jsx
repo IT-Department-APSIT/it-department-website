@@ -53,8 +53,9 @@ export default function Footer() {
                     </div>
                 </div>
 
+                <p className="footer-copyright">&copy; {new Date().getFullYear()} Department of Information Technology, A.P. Shah Institute of Technology. All rights reserved.</p>
                 <div className="footer-bottom">
-                    <p>&copy; {new Date().getFullYear()} Department of Information Technology, A.P. Shah Institute of Technology. All rights reserved.</p>
+                    <p>Designed &amp; Developed by Tanishq Shelar</p>
                 </div>
             </div>
         </footer>

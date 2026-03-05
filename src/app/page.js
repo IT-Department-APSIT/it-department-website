@@ -10,6 +10,7 @@ import {
   ChevronLeft, ChevronRight
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabaseClient';
 
 // Animation variants
@@ -70,7 +71,7 @@ function HeroSection() {
   // Preload all hero images into browser cache on mount
   useEffect(() => {
     images.forEach((img) => {
-      const preload = new Image();
+      const preload = new window.Image();
       preload.src = img.image_url;
     });
   }, []);
@@ -138,12 +139,14 @@ function HeroSection() {
           exit="exit"
           className="hero-slide"
         >
-          <img
+          <Image
             src={images[currentIndex]?.image_url}
             alt={images[currentIndex]?.alt_text || 'Hero image'}
             className="hero-slide-image"
-            loading="eager"
-            fetchPriority="high"
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: 'cover' }}
           />
         </motion.div>
       </AnimatePresence>
@@ -273,12 +276,12 @@ function AboutSection() {
               position: 'relative',
               overflow: 'hidden'
             }}>
-              <img
+              <Image
                 src="/assets/teaching.jpeg"
                 alt="Teaching at IT Department"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 style={{
-                  width: '100%',
-                  height: '100%',
                   objectFit: 'cover',
                   objectPosition: 'center'
                 }}
@@ -363,13 +366,13 @@ function ProgramsSection() {
         pointerEvents: 'none',
         zIndex: 0
       }}>
-        <img
-          src="/assets/success-stairs.png"
+        <Image
+          src="/assets/success-stairs.webp"
           alt=""
           aria-hidden="true"
+          fill
+          sizes="400px"
           style={{
-            width: '100%',
-            height: '100%',
             objectFit: 'contain'
           }}
         />
@@ -479,10 +482,12 @@ function ProgramsSection() {
           {programs.map((program, index) => (
             <motion.div key={index} className="program-card" variants={fadeInUp}>
               <div className="program-image">
-                <img
+                <Image
                   src={program.logo}
                   alt={program.title}
                   className="program-logo"
+                  width={200}
+                  height={200}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -621,10 +626,14 @@ function HallOfFameSection() {
               className="hof-image-container"
             >
               {currentHonoree.image_url && (
-                <img
+                <Image
                   src={currentHonoree.image_url}
                   alt={currentHonoree.name}
                   className="hof-image"
+                  width={300}
+                  height={300}
+                  sizes="(max-width: 768px) 200px, 300px"
+                  style={{ objectFit: 'cover' }}
                 />
               )}
             </motion.div>
@@ -784,11 +793,15 @@ function GallerySection() {
             loop
           />
         ) : (
-          <img
+          <Image
             src={item.image_url}
             alt={item.alt_text || 'Gallery image'}
             className="masonry-media"
+            width={400}
+            height={300}
+            sizes="(max-width: 768px) 50vw, 25vw"
             loading="lazy"
+            style={{ width: '100%', height: 'auto' }}
           />
         )}
       </motion.div>
@@ -876,10 +889,14 @@ function GallerySection() {
                   autoPlay
                 />
               ) : (
-                <img
+                <Image
                   src={selectedMedia.image_url}
                   alt={selectedMedia.alt_text || 'Gallery image'}
                   className="gallery-lightbox-media"
+                  width={1200}
+                  height={800}
+                  sizes="90vw"
+                  style={{ width: '100%', height: 'auto', maxHeight: '90vh', objectFit: 'contain' }}
                 />
               )}
             </motion.div>

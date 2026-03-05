@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, ArrowRight, Sparkles, Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabaseClient';
 
 const fadeInUp = {
@@ -123,9 +124,13 @@ export default function EventsPage() {
                                 >
                                     {event.poster_url && (
                                         <div className="event-poster-wrapper">
-                                            <img
+                                            <Image
                                                 src={event.poster_url}
                                                 alt={event.event_name}
+                                                width={800}
+                                                height={450}
+                                                sizes="(max-width: 768px) 100vw, 50vw"
+                                                style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
                                             />
                                         </div>
                                     )}

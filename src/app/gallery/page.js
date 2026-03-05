@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabaseClient';
 
 // Animation variants
@@ -86,11 +87,15 @@ export default function GalleryPage() {
                         loop
                     />
                 ) : (
-                    <img
+                    <Image
                         src={item.image_url}
                         alt={item.alt_text || 'Gallery image'}
                         className="masonry-media"
+                        width={400}
+                        height={300}
+                        sizes="(max-width: 768px) 50vw, 25vw"
                         loading="lazy"
+                        style={{ width: '100%', height: 'auto' }}
                     />
                 )}
             </motion.div>
@@ -171,10 +176,14 @@ export default function GalleryPage() {
                                     autoPlay
                                 />
                             ) : (
-                                <img
+                                <Image
                                     src={selectedMedia.image_url}
                                     alt={selectedMedia.alt_text || 'Gallery image'}
                                     className="gallery-lightbox-media"
+                                    width={1200}
+                                    height={800}
+                                    sizes="90vw"
+                                    style={{ width: '100%', height: 'auto', maxHeight: '90vh', objectFit: 'contain' }}
                                 />
                             )}
                         </motion.div>

@@ -6,6 +6,7 @@ import {
     Code, Palette, Megaphone, BookOpen, Rocket,
     ArrowRight, Mail, Instagram, Linkedin, Twitter
 } from 'lucide-react';
+import Image from 'next/image';
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -171,9 +172,12 @@ export default function ITSAPage() {
                         </motion.div>
 
                         <motion.div variants={fadeInUp}>
-                            <img
-                                src="/assets/posters/forward.png"
+                            <Image
+                                src="/assets/posters/forward.webp"
                                 alt="ITSA Forward"
+                                width={800}
+                                height={600}
+                                sizes="(max-width: 768px) 100vw, 50vw"
                                 style={{
                                     width: '100%',
                                     height: 'auto',
@@ -348,9 +352,12 @@ export default function ITSAPage() {
                                     opacity: 0.3,
                                     filter: 'blur(20px)'
                                 }} />
-                                <img
+                                <Image
                                     src="/facultyimages/kbd.jpg"
                                     alt="Dr. K. B. Deshpande - HOD IT"
+                                    width={400}
+                                    height={500}
+                                    sizes="(max-width: 768px) 80vw, 400px"
                                     style={{
                                         position: 'relative',
                                         width: '100%',
@@ -449,9 +456,12 @@ export default function ITSAPage() {
                                         overflow: 'hidden',
                                         background: 'var(--surface)',
                                     }}>
-                                        <img
+                                        <Image
                                             src={member.image}
                                             alt={member.name}
+                                            width={130}
+                                            height={130}
+                                            sizes="130px"
                                             style={{
                                                 width: '100%',
                                                 height: '100%',
@@ -637,10 +647,14 @@ export default function ITSAPage() {
                 className="itsa-podcast-section"
             >
                 {/* Full Poster Image */}
-                <img
-                    src="/assets/posters/podcast-poster.png"
+                <Image
+                    src="/assets/posters/podcast-poster.webp"
                     alt="ITSA Podcast"
                     className="itsa-podcast-poster"
+                    width={1920}
+                    height={1080}
+                    sizes="100vw"
+                    style={{ width: '100%', height: 'auto' }}
                 />
 
                 {/* Instagram Reels Overlay - Hidden on mobile */}
@@ -688,9 +702,12 @@ export default function ITSAPage() {
                     lineHeight: 0
                 }}
             >
-                <img
+                <Image
                     src="/assets/posters/mpr-itsa.jpg"
                     alt="MPR ITSA"
+                    width={1920}
+                    height={1080}
+                    sizes="100vw"
                     style={{
                         width: '100%',
                         height: 'auto',
@@ -707,7 +724,7 @@ export default function ITSAPage() {
                 transition={{ duration: 0.6 }}
                 className="itsa-blueback-section"
                 style={{
-                    backgroundImage: 'url(/assets/posters/blueback.png)'
+                    backgroundImage: 'url(/assets/posters/blueback.webp)'
                 }}
             >
                 {/* Blue Tinted Transparent Panel */}
