@@ -307,50 +307,33 @@ export default function EventDetailPage() {
                                 </h2>
                             </div>
 
-                            <div style={{
-                                display: 'grid',
-                                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                                gap: '1.5rem'
-                            }}>
+                            <div className="masonry-grid">
                                 {event.media_urls.map((url, index) => {
                                     const isVideo = url.includes('.mp4') || url.includes('.webm') || url.includes('.mov');
                                     return (
-                                        <motion.div
+                                        <div
                                             key={index}
-                                            whileHover={{ scale: 1.05 }}
-                                            style={{
-                                                borderRadius: '12px',
-                                                overflow: 'hidden',
-                                                cursor: 'pointer',
-                                                boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-                                                border: '1px solid rgba(255,255,255,0.1)',
-                                                transition: 'all 0.3s ease'
-                                            }}
+                                            className="masonry-item"
                                             onClick={() => openLightbox(index)}
                                         >
                                             {isVideo ? (
                                                 <video
                                                     src={url}
-                                                    style={{
-                                                        width: '100%',
-                                                        height: '250px',
-                                                        objectFit: 'cover',
-                                                        display: 'block'
-                                                    }}
+                                                    className="masonry-media"
                                                 />
                                             ) : (
                                                 <img
                                                     src={url}
                                                     alt={`Event media ${index + 1}`}
-                                                    style={{
-                                                        width: '100%',
-                                                        height: '250px',
-                                                        objectFit: 'cover',
-                                                        display: 'block'
-                                                    }}
+                                                    className="masonry-media"
                                                 />
                                             )}
-                                        </motion.div>
+                                            <div className="masonry-overlay">
+                                                <div className="masonry-view-icon">
+                                                    <ImageIcon size={24} />
+                                                </div>
+                                            </div>
+                                        </div>
                                     );
                                 })}
                             </div>
