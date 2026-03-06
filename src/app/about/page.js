@@ -96,7 +96,7 @@ const FacultyCard = ({ member }) => {
                             margin: '0 auto 16px',
                             border: '4px solid var(--secondary)',
                             boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
-                            background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
+                            background: '#ffffff',
                         }}>
                             <Image
                                 src={`/facultyimages/${member.image}`}

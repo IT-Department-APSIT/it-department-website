@@ -351,6 +351,11 @@ function ProgramsSection() {
       title: 'APSIT Skills',
       description: 'In-house skill development programs tailored for IT students with industry-relevant training.',
     },
+    {
+      logo: '/assets/it-logos/redhat.jpg',
+      title: 'Red Hat Academy',
+      description: 'Industry-leading open source training covering Linux, cloud technologies, and enterprise solutions with Red Hat certification.',
+    },
   ];
 
   return (
