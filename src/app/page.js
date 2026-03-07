@@ -57,9 +57,9 @@ const slideVariants = {
 
 // Hero images defined outside component to avoid re-creation on each render
 const HERO_IMAGES = [
-  { id: 1, image_url: '/assets/hero-pics/lab-hero.png', alt_text: 'lab hero' },
-  { id: 2, image_url: '/assets/hero-pics/hackscript-hero.jpg', alt_text: 'Hackscript hero' },
-  { id: 3, image_url: '/assets/hero-pics/general-hero.jpg', alt_text: 'general hero' },
+  { id: 1, image_url: '/assets/hero-pics/lab-hero.webp', alt_text: 'lab hero' },
+  { id: 2, image_url: '/assets/hero-pics/hackscript-hero.webp', alt_text: 'Hackscript hero' },
+  { id: 3, image_url: '/assets/hero-pics/general-hero.webp', alt_text: 'general hero' },
 ];
 
 // Hero Slider Section

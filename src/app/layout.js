@@ -42,8 +42,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="preload" href="/assets/hero-pics/IMG-20251001-WA0007.jpg" as="image" fetchPriority="high" />
-        <link rel="preload" href="/assets/hero-pics/ss3.jpeg" as="image" fetchPriority="high" />
+        <link rel="preload" href="/assets/hero-pics/lab-hero.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/assets/hero-pics/hackscript-hero.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/assets/hero-pics/general-hero.webp" as="image" type="image/webp" fetchPriority="high" />
       </head>
       <body className={`${poppins.variable} ${playfairDisplay.variable} ${dancingScript.variable} ${inter.variable}`}>
         <LayoutWrapper>{children}</LayoutWrapper>
