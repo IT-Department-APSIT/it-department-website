@@ -106,11 +106,129 @@ export default function EventDetailPage() {
         );
     }
 
+    const formatDateShort = (dateString) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+        });
+    };
+
     return (
         <>
-            {/* Page Header */}
-            <div className="page-header">
+            {/* ===== MOBILE EVENT DETAIL VIEW ===== */}
+            <div className="event-detail-mobile-view">
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={fadeInUp}
+                    className="event-mobile-card"
+                >
+                    {/* Poster */}
+                    <div className="event-mobile-poster-section">
+                        {event.poster_url ? (
+                            <img
+                                src={event.poster_url}
+                                alt={event.event_name}
+                                className="event-mobile-poster-img"
+                            />
+                        ) : (
+                            <div className="event-mobile-poster-placeholder">
+                                <ImageIcon size={48} color="var(--text-muted)" />
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="event-mobile-body">
+                        <h1 className="event-mobile-title">{event.event_name}</h1>
+
+                        {event.event_type && (
+                            <span className="event-mobile-type-badge">{event.event_type}</span>
+                        )}
+
+                        <div className="event-mobile-meta-row">
+                            {event.event_date && (
+                                <div className="event-mobile-meta-chip">
+                                    <Calendar size={14} color="var(--secondary)" />
+                                    <span>{formatDateShort(event.event_date)}</span>
+                                </div>
+                            )}
+                            {event.venue && (
+                                <div className="event-mobile-meta-chip">
+                                    <MapPin size={14} color="var(--accent)" />
+                                    <span>{event.venue}</span>
+                                </div>
+                            )}
+                        </div>
+
+                        {event.description && (
+                            <div className="event-mobile-about-section">
+                                <h2 className="event-mobile-about-heading">About Event</h2>
+                                <p className="event-mobile-about-text">{event.description}</p>
+                            </div>
+                        )}
+
+                        {/* Mobile Gallery */}
+                        {event.media_urls && event.media_urls.length > 0 && (
+                            <div className="event-mobile-gallery-section">
+                                <div className="event-mobile-gallery-header">
+                                    <ImageIcon size={18} color="var(--accent)" />
+                                    <h2 className="event-mobile-gallery-title">Event Gallery</h2>
+                                </div>
+                                <div className="event-mobile-gallery-grid">
+                                    {event.media_urls.map((url, index) => {
+                                        const isVideo = url.includes('.mp4') || url.includes('.webm') || url.includes('.mov');
+                                        return (
+                                            <div
+                                                key={index}
+                                                className="event-mobile-gallery-item"
+                                                onClick={() => openLightbox(index)}
+                                            >
+                                                {isVideo ? (
+                                                    <video src={url} className="event-mobile-gallery-media" />
+                                                ) : (
+                                                    <img src={url} alt={`Event media ${index + 1}`} className="event-mobile-gallery-media" />
+                                                )}
+                                                <div className="event-mobile-gallery-overlay">
+                                                    <ImageIcon size={20} />
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </motion.div>
+
+                {/* Floating Footer - only for upcoming events */}
+                {(!event.event_date || new Date(event.event_date) >= new Date(new Date().toDateString())) && (
+                    <div className="event-mobile-floating-footer">
+                        <div className="event-mobile-footer-inner">
+                            {event.registration_url ? (
+                                <a
+                                    href={event.registration_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="event-mobile-footer-register-btn"
+                                >
+                                    Register Now
+                                </a>
+                            ) : (
+                                <span className="event-mobile-footer-closed-badge">Registration Closed</span>
+                            )}
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            {/* ===== DESKTOP EVENT DETAIL VIEW ===== */}
+            <section className="section event-detail-desktop-view" style={{ paddingTop: '120px' }}>
                 <div className="container">
+                    {/* Back Button */}
                     <button
                         onClick={(e) => {
                             e.preventDefault();
@@ -120,160 +238,175 @@ export default function EventDetailPage() {
                         style={{
                             background: 'transparent',
                             border: 'none',
-                            color: 'var(--accent)',
+                            color: 'var(--secondary)',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.5rem',
-                            fontSize: '1rem',
-                            marginBottom: '1rem',
+                            fontSize: '0.95rem',
+                            fontWeight: 500,
+                            marginBottom: '1.5rem',
                             padding: '0.5rem 0',
                             outline: 'none',
-                            position: 'relative',
-                            zIndex: 10,
                             transition: 'all 0.2s ease'
                         }}
                         onMouseOver={(e) => {
-                            e.target.style.color = 'var(--primary)';
-                            e.target.style.transform = 'translateX(-2px)';
+                            e.currentTarget.style.color = 'var(--primary)';
+                            e.currentTarget.style.transform = 'translateX(-4px)';
                         }}
                         onMouseOut={(e) => {
-                            e.target.style.color = 'var(--accent)';
-                            e.target.style.transform = 'translateX(0)';
+                            e.currentTarget.style.color = 'var(--secondary)';
+                            e.currentTarget.style.transform = 'translateX(0)';
                         }}
                     >
-                        <ArrowLeft size={20} /> Back to Events
+                        <ArrowLeft size={18} /> Back to Events
                     </button>
-                    <h1>{event.event_name}</h1>
-                    {event.event_type && (
-                        <span style={{
-                            display: 'inline-block',
-                            padding: '8px 20px',
-                            background: 'linear-gradient(135deg, rgba(251,191,36,0.3) 0%, rgba(251,191,36,0.2) 100%)',
-                            border: '1px solid rgba(251,191,36,0.5)',
-                            borderRadius: '50px',
-                            fontSize: '0.9rem',
-                            fontWeight: 600,
-                            color: 'var(--accent)',
-                            marginTop: '1rem'
-                        }}>
-                            {event.event_type}
-                        </span>
-                    )}
-                </div>
-            </div>
 
-            {/* Event Details */}
-            <section className="section">
-                <div className="container">
                     <motion.div
                         initial="hidden"
                         animate="visible"
                         variants={fadeInUp}
-                        className="card event-detail-grid"
+                        className="event-detail-compact"
+                        style={{
+                            gridTemplateColumns: event.poster_url ? '240px 1fr' : '1fr'
+                        }}
                     >
-                        {/* Right Column - Poster (appears first on mobile) */}
+                        {/* Poster - compact */}
                         {event.poster_url && (
-                            <div className="event-poster-sticky">
-                                <div className="event-poster-container">
-                                    <img
-                                        src={event.poster_url}
-                                        alt={event.event_name}
-                                    />
-                                </div>
+                            <div style={{
+                                borderRadius: '12px',
+                                overflow: 'hidden',
+                                boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+                                border: '1px solid var(--border)',
+                                lineHeight: 0
+                            }}>
+                                <img
+                                    src={event.poster_url}
+                                    alt={event.event_name}
+                                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                                />
                             </div>
                         )}
 
-                        {/* Left Column - Event Details */}
-                        <div className="event-detail-content">
-                            {/* Date and Venue */}
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        {/* Event Info */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                            {/* Event Name */}
+                            <h1 style={{
+                                fontSize: '1.35rem',
+                                fontWeight: 700,
+                                color: 'var(--primary)',
+                                margin: 0,
+                                lineHeight: 1.3
+                            }}>
+                                {event.event_name}
+                            </h1>
+
+                            {/* Event Type Badge */}
+                            {event.event_type && (
+                                <span style={{
+                                    display: 'inline-block',
+                                    padding: '3px 12px',
+                                    background: 'linear-gradient(135deg, rgba(251,191,36,0.15) 0%, rgba(251,191,36,0.08) 100%)',
+                                    border: '1px solid rgba(251,191,36,0.25)',
+                                    borderRadius: '50px',
+                                    fontSize: '0.75rem',
+                                    fontWeight: 600,
+                                    color: 'var(--accent)',
+                                    width: 'fit-content'
+                                }}>
+                                    {event.event_type}
+                                </span>
+                            )}
+
+                            {/* Date & Venue - compact inline */}
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                                 {event.event_date && (
-                                    <div className="event-info-card" style={{
-                                        background: 'linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(147,51,234,0.1) 100%)',
-                                        border: '1px solid rgba(59,130,246,0.2)'
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.4rem',
+                                        padding: '6px 12px',
+                                        background: 'rgba(59,130,246,0.08)',
+                                        border: '1px solid rgba(59,130,246,0.15)',
+                                        borderRadius: '8px',
+                                        fontSize: '0.82rem',
+                                        color: 'var(--text-primary)',
+                                        fontWeight: 500
                                     }}>
-                                        <Calendar size={24} color="var(--secondary)" />
-                                        <div>
-                                            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
-                                                Event Date
-                                            </div>
-                                            <div style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                                                {formatDate(event.event_date)}
-                                            </div>
-                                        </div>
+                                        <Calendar size={14} color="var(--secondary)" />
+                                        {formatDate(event.event_date)}
                                     </div>
                                 )}
-
                                 {event.venue && (
-                                    <div className="event-info-card" style={{
-                                        background: 'linear-gradient(135deg, rgba(251,191,36,0.1) 0%, rgba(245,158,11,0.1) 100%)',
-                                        border: '1px solid rgba(251,191,36,0.2)'
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.4rem',
+                                        padding: '6px 12px',
+                                        background: 'rgba(251,191,36,0.08)',
+                                        border: '1px solid rgba(251,191,36,0.15)',
+                                        borderRadius: '8px',
+                                        fontSize: '0.82rem',
+                                        color: 'var(--text-primary)',
+                                        fontWeight: 500
                                     }}>
-                                        <MapPin size={24} color="var(--accent)" />
-                                        <div>
-                                            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
-                                                Venue
-                                            </div>
-                                            <div style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                                                {event.venue}
-                                            </div>
-                                        </div>
+                                        <MapPin size={14} color="var(--accent)" />
+                                        {event.venue}
                                     </div>
                                 )}
                             </div>
 
-                            {/* Register Now Button */}
+                            {/* Register Button - compact */}
                             {event.registration_url && (
                                 <a
                                     href={event.registration_url}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     style={{
-                                        display: 'block',
-                                        width: '100%',
-                                        padding: '1rem',
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: '0.6rem 1.5rem',
                                         background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
                                         color: '#1a1a2e',
-                                        textAlign: 'center',
                                         textDecoration: 'none',
-                                        borderRadius: '12px',
-                                        fontSize: '1.1rem',
+                                        borderRadius: '10px',
+                                        fontSize: '0.9rem',
                                         fontWeight: 700,
                                         transition: 'all 0.3s ease',
-                                        border: 'none',
-                                        boxShadow: '0 4px 15px rgba(251,191,36,0.3)',
-                                        cursor: 'pointer'
+                                        boxShadow: '0 3px 10px rgba(251,191,36,0.25)',
+                                        width: 'fit-content'
                                     }}
                                     onMouseOver={(e) => {
                                         e.currentTarget.style.transform = 'translateY(-2px)';
-                                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(251,191,36,0.4)';
+                                        e.currentTarget.style.boxShadow = '0 5px 16px rgba(251,191,36,0.35)';
                                     }}
                                     onMouseOut={(e) => {
                                         e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(251,191,36,0.3)';
+                                        e.currentTarget.style.boxShadow = '0 3px 10px rgba(251,191,36,0.25)';
                                     }}
                                 >
                                     Register Now
                                 </a>
                             )}
 
-                            {/* Description */}
+                            {/* Description - compact */}
                             {event.description && (
-                                <div>
+                                <div style={{ borderTop: '1px solid var(--border)', paddingTop: '0.75rem' }}>
                                     <h2 style={{
-                                        fontSize: '1.5rem',
-                                        fontWeight: 700,
+                                        fontSize: '1rem',
+                                        fontWeight: 600,
                                         color: 'var(--primary)',
-                                        marginBottom: '1rem'
+                                        marginBottom: '0.4rem'
                                     }}>
                                         About This Event
                                     </h2>
                                     <p style={{
                                         color: 'var(--text-secondary)',
-                                        lineHeight: 1.8,
-                                        fontSize: '1.05rem',
-                                        whiteSpace: 'pre-wrap'
+                                        lineHeight: 1.65,
+                                        fontSize: '0.88rem',
+                                        whiteSpace: 'pre-wrap',
+                                        margin: 0
                                     }}>
                                         {event.description}
                                     </p>
@@ -293,13 +426,13 @@ export default function EventDetailPage() {
                             <div style={{
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: '1rem',
-                                marginBottom: '2rem'
+                                gap: '0.6rem',
+                                marginBottom: '1.25rem'
                             }}>
-                                <ImageIcon size={32} color="var(--accent)" />
+                                <ImageIcon size={22} color="var(--accent)" />
                                 <h2 style={{
-                                    fontSize: '1.75rem',
-                                    fontWeight: 700,
+                                    fontSize: '1.15rem',
+                                    fontWeight: 600,
                                     color: 'var(--primary)',
                                     margin: 0
                                 }}>

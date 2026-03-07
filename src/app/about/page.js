@@ -54,50 +54,21 @@ const FacultyCard = ({ member }) => {
 
     return (
         <motion.div
+            className="faculty-card-wrapper"
             variants={fadeInUp}
-            style={{
-                perspective: '1000px',
-                height: '400px'
-            }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
             <div
+                className="faculty-card-inner"
                 style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '100%',
-                    transition: 'transform 0.6s',
-                    transformStyle: 'preserve-3d',
                     transform: isHovered ? 'rotateY(180deg)' : 'rotateY(0deg)',
                 }}
             >
                 {/* Front of Card */}
-                <div
-                    className="card"
-                    style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        backfaceVisibility: 'hidden',
-                        textAlign: 'center',
-                        padding: 28,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center'
-                    }}
-                >
+                <div className="card faculty-card-face faculty-card-front">
                     <div>
-                        <div style={{
-                            width: 120,
-                            height: 120,
-                            borderRadius: '50%',
-                            overflow: 'hidden',
-                            margin: '0 auto 16px',
-                            border: '4px solid var(--secondary)',
-                            boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
-                            background: '#ffffff',
-                        }}>
+                        <div className="faculty-avatar">
                             <Image
                                 src={`/facultyimages/${member.image}`}
                                 alt={member.name}
@@ -114,96 +85,30 @@ const FacultyCard = ({ member }) => {
                                 }}
                             />
                         </div>
-                        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6 }}>
-                            {member.name}
-                        </h3>
-                        <p style={{ color: 'var(--secondary)', fontWeight: 600, fontSize: '0.85rem', marginBottom: 8 }}>
-                            {member.position}
-                        </p>
-                        <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: 4 }}>
-                            {member.qualification}
-                        </p>
-                        <p style={{
-                            color: 'var(--text-secondary)',
-                            fontSize: '0.75rem',
-                            padding: '6px 14px',
-                            background: 'linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(147,51,234,0.1) 100%)',
-                            border: '1px solid rgba(59,130,246,0.2)',
-                            borderRadius: '50px',
-                            display: 'inline-block',
-                            marginTop: 8,
-                            fontWeight: 500
-                        }}>
-                            {member.experience}
-                        </p>
+                        <h3 className="faculty-name">{member.name}</h3>
+                        <p className="faculty-position">{member.position}</p>
+                        <p className="faculty-qualification">{member.qualification}</p>
+                        <p className="faculty-experience">{member.experience}</p>
                     </div>
                 </div>
 
                 {/* Back of Card */}
-                <div
-                    className="card"
-                    style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        backfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg)',
-                        textAlign: 'center',
-                        padding: 28,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        background: 'linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,51,234,0.05) 100%)',
-                    }}
-                >
+                <div className="card faculty-card-face faculty-card-back">
                     <div>
-                        <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 16 }}>
-                            {member.name}
-                        </h3>
-                        <div style={{ textAlign: 'left', marginBottom: 16 }}>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
-                                <strong>Position:</strong> {member.position}
-                            </p>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
-                                <strong>Qualification:</strong> {member.qualification}
-                            </p>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
-                                <strong>Experience:</strong> {member.experience}
-                            </p>
+                        <h3 className="faculty-back-name">{member.name}</h3>
+                        <div className="faculty-back-details">
+                            <p><strong>Position:</strong> {member.position}</p>
+                            <p><strong>Qualification:</strong> {member.qualification}</p>
+                            <p><strong>Experience:</strong> {member.experience}</p>
                         </div>
-                        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.6 }}>
-                            Click below to view detailed profile, publications, and research areas.
-                        </p>
+                        <p className="faculty-back-cta">Click below to view detailed profile, publications, and research areas.</p>
                     </div>
                     <div>
                         <a
                             href={member.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            style={{
-                                padding: '12px 24px',
-                                background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '8px',
-                                fontSize: '0.9rem',
-                                fontWeight: 600,
-                                cursor: 'pointer',
-                                textDecoration: 'none',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: 8,
-                                transition: 'all 0.3s ease'
-                            }}
-                            onMouseOver={(e) => {
-                                e.target.style.transform = 'translateY(-2px)';
-                                e.target.style.boxShadow = '0 8px 20px rgba(59,130,246,0.4)';
-                            }}
-                            onMouseOut={(e) => {
-                                e.target.style.transform = 'translateY(0)';
-                                e.target.style.boxShadow = 'none';
-                            }}
+                            className="faculty-profile-btn"
                         >
                             View Full Profile <ExternalLink size={16} />
                         </a>
@@ -320,15 +225,11 @@ export default function AboutPage() {
                     </motion.div>
 
                     <motion.div
+                        className="faculty-grid"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={staggerContainer}
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                            gap: 24
-                        }}
                     >
                         {facultyData.map((member, index) => (
                             <FacultyCard key={index} member={member} />

@@ -69,13 +69,7 @@ function HeroSection() {
   const [direction, setDirection] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Preload all hero images into browser cache on mount
-  useEffect(() => {
-    images.forEach((img) => {
-      const preload = new window.Image();
-      preload.src = img.image_url;
-    });
-  }, []);
+
 
   // Auto-play functionality
   useEffect(() => {
@@ -145,7 +139,7 @@ function HeroSection() {
             alt={images[currentIndex]?.alt_text || 'Hero image'}
             className="hero-slide-image"
             fill
-            priority
+            priority={currentIndex === 0}
             sizes="100vw"
             style={{ objectFit: 'cover' }}
           />

@@ -74,16 +74,9 @@ export default function EventsPage() {
 
     return (
         <>
-            {/* Page Header */}
-            <div className="page-header">
-                <div className="container">
-                    <h1>Events</h1>
-                    <p>Stay updated with our workshops, seminars, and technical events</p>
-                </div>
-            </div>
 
             {/* Upcoming Events */}
-            <section className="section">
+            <section className="section" style={{ paddingTop: '120px' }}>
                 <div className="container">
                     <motion.div
                         initial="hidden"
@@ -91,10 +84,10 @@ export default function EventsPage() {
                         viewport={{ once: true }}
                         variants={staggerContainer}
                     >
-                        <motion.h2 variants={fadeInUp} className="section-title">
+                        <motion.h2 variants={fadeInUp} className="section-title" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
                             Upcoming Events
                         </motion.h2>
-                        <motion.p variants={fadeInUp} className="section-subtitle">
+                        <motion.p variants={fadeInUp} className="section-subtitle" style={{ fontSize: '1rem' }}>
                             Don't miss out on these exciting opportunities to learn and grow.
                         </motion.p>
                     </motion.div>
@@ -200,10 +193,10 @@ export default function EventsPage() {
                             viewport={{ once: true }}
                             variants={staggerContainer}
                         >
-                            <motion.h2 variants={fadeInUp} className="section-title">
+                            <motion.h2 variants={fadeInUp} className="section-title" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
                                 Past Events
                             </motion.h2>
-                            <motion.p variants={fadeInUp} className="section-subtitle">
+                            <motion.p variants={fadeInUp} className="section-subtitle" style={{ fontSize: '1rem' }}>
                                 A look back at our successful events and activities.
                             </motion.p>
                         </motion.div>
