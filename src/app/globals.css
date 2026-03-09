@@ -4009,8 +4009,7 @@ ol {
 .event-mobile-poster-img {
   width: 100%;
   height: auto;
-  max-height: 42vh;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   border-radius: 16px;
 }
