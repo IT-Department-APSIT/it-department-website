@@ -287,9 +287,17 @@ ol {
   box-shadow: var(--shadow-xl);
 }
 
+.faculty-card-face.card {
+  transition: none;
+}
+
 .faculty-card-face.card:hover {
   transform: none;
   box-shadow: var(--shadow-md);
+}
+
+.faculty-card-back.card:hover {
+  transform: rotateY(180deg);
 }
 
 .card-glass {
