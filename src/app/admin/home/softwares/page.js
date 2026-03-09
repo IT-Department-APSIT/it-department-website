@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Plus, Trash2, Edit2, ArrowLeft, X, Code } from 'lucide-react';
+import { Plus, Trash2, Edit2, ArrowLeft, X, Code, ExternalLink } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
 
 export default function AdminDepartmentSoftwaresPage() {
@@ -18,6 +18,7 @@ export default function AdminDepartmentSoftwaresPage() {
         tagline: '',
         description: '',
         tech_stack: '',
+        live_link: '',
         team_member_1: '',
         team_member_2: '',
         team_member_3: '',
@@ -67,6 +68,7 @@ export default function AdminDepartmentSoftwaresPage() {
                 tagline: formData.tagline.trim(),
                 description: formData.description.trim(),
                 tech_stack: techStackArray,
+                live_link: formData.live_link.trim() || null,
                 team_member_1: formData.team_member_1.trim() || null,
                 team_member_2: formData.team_member_2.trim() || null,
                 team_member_3: formData.team_member_3.trim() || null,
@@ -110,6 +112,7 @@ export default function AdminDepartmentSoftwaresPage() {
             tagline: software.tagline || '',
             description: software.description || '',
             tech_stack: software.tech_stack ? software.tech_stack.join(', ') : '',
+            live_link: software.live_link || '',
             team_member_1: software.team_member_1 || '',
             team_member_2: software.team_member_2 || '',
             team_member_3: software.team_member_3 || '',
@@ -143,6 +146,7 @@ export default function AdminDepartmentSoftwaresPage() {
             tagline: '',
             description: '',
             tech_stack: '',
+            live_link: '',
             team_member_1: '',
             team_member_2: '',
             team_member_3: '',
@@ -345,6 +349,31 @@ export default function AdminDepartmentSoftwaresPage() {
                                     />
                                 </div>
 
+                                {/* Live Project Link */}
+                                <div>
+                                    <label style={{ color: '#fff', display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
+                                        Live Project Link
+                                    </label>
+                                    <input
+                                        type="url"
+                                        value={formData.live_link}
+                                        onChange={(e) => setFormData(prev => ({ ...prev, live_link: e.target.value }))}
+                                        placeholder="https://your-project-url.com"
+                                        style={{
+                                            width: '100%',
+                                            padding: '0.75rem',
+                                            background: 'rgba(255,255,255,0.1)',
+                                            border: '1px solid rgba(255,255,255,0.2)',
+                                            borderRadius: '8px',
+                                            color: '#fff',
+                                            fontSize: '1rem'
+                                        }}
+                                    />
+                                    <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                                        Optional. Add the URL of the deployed project to show a &quot;Live&quot; button.
+                                    </p>
+                                </div>
+
                                 {/* Team Members */}
                                 <div>
                                     <label style={{ color: '#fff', display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
@@ -493,6 +522,31 @@ export default function AdminDepartmentSoftwaresPage() {
                                     fontSize: '1.25rem'
                                 }}>
                                     {software.project_name}
+                                    {software.live_link && (
+                                        <a
+                                            href={software.live_link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={(e) => e.stopPropagation()}
+                                            style={{
+                                                display: 'inline-flex',
+                                                alignItems: 'center',
+                                                gap: '0.25rem',
+                                                padding: '0.2rem 0.6rem',
+                                                background: 'rgba(34, 197, 94, 0.2)',
+                                                border: '1px solid rgba(34, 197, 94, 0.5)',
+                                                borderRadius: '12px',
+                                                color: '#22c55e',
+                                                fontSize: '0.7rem',
+                                                fontWeight: '600',
+                                                textDecoration: 'none',
+                                                marginLeft: '0.5rem',
+                                                verticalAlign: 'middle'
+                                            }}
+                                        >
+                                            <ExternalLink size={10} /> Live
+                                        </a>
+                                    )}
                                 </h3>
                                 {software.tagline && (
                                     <p style={{

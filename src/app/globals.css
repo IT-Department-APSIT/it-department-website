@@ -1775,6 +1775,81 @@ ol {
   margin-top: 8px;
 }
 
+/* Software Live Button (on card) */
+.software-live-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 50px;
+  color: #16a34a;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  position: relative;
+  margin-right: auto;
+}
+
+.software-live-btn::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse-live 2s ease-in-out infinite;
+}
+
+@keyframes pulse-live {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
+}
+
+.software-live-btn:hover {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.5);
+  color: #15803d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+}
+
+/* Software Modal Live Button */
+.software-modal-live-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3);
+}
+
+.software-modal-live-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.software-modal-live-btn:active {
+  transform: translateY(0);
+}
+
 /* Software Modal */
 .software-modal-overlay {
   position: fixed;
@@ -2700,7 +2775,7 @@ ol {
 .faculty-card-back {
   transform: rotateY(180deg);
   justify-content: space-between;
-  background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,51,234,0.05) 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%);
 }
 
 .faculty-avatar {
@@ -2710,7 +2785,7 @@ ol {
   overflow: hidden;
   margin: 0 auto 16px;
   border: 4px solid var(--secondary);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   background: #ffffff;
   flex-shrink: 0;
 }
@@ -2739,8 +2814,8 @@ ol {
   color: var(--text-secondary);
   font-size: 0.75rem;
   padding: 6px 14px;
-  background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(147,51,234,0.1) 100%);
-  border: 1px solid rgba(59,130,246,0.2);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.2);
   border-radius: 50px;
   display: inline-block;
   margin-top: 8px;
@@ -2793,7 +2868,7 @@ ol {
 
 .faculty-profile-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(59,130,246,0.4);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
 }
 
 /* Programs grid on mobile */
@@ -3907,8 +3982,10 @@ ol {
 /* Mobile Card Container */
 .event-mobile-card {
   min-height: 100vh;
-  padding-top: 90px; /* clear navbar */
-  padding-bottom: 110px; /* space for floating footer */
+  padding-top: 90px;
+  /* clear navbar */
+  padding-bottom: 110px;
+  /* space for floating footer */
 }
 
 /* Poster Section */
@@ -3936,7 +4013,7 @@ ol {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(26,54,93,0.06), rgba(49,130,206,0.08));
+  background: linear-gradient(135deg, rgba(26, 54, 93, 0.06), rgba(49, 130, 206, 0.08));
 }
 
 /* Back Button - floating on poster */
@@ -3988,8 +4065,8 @@ ol {
   display: inline-block;
   width: fit-content;
   padding: 4px 14px;
-  background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(251,191,36,0.08));
-  border: 1px solid rgba(251,191,36,0.3);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.08));
+  border: 1px solid rgba(251, 191, 36, 0.3);
   border-radius: 50px;
   font-size: 0.72rem;
   font-weight: 700;
@@ -4121,6 +4198,7 @@ ol {
     padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
     pointer-events: none;
   }
+
   .event-mobile-floating-footer * {
     pointer-events: auto;
   }

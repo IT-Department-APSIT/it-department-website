@@ -16,11 +16,11 @@ export default function Footer() {
                             innovation, and industry collaboration.
                         </p>
                         <div className="footer-social">
-                            <a href="#" aria-label="Facebook"><Facebook size={18} /></a>
-                            <a href="#" aria-label="Twitter"><Twitter size={18} /></a>
-                            <a href="#" aria-label="LinkedIn"><Linkedin size={18} /></a>
-                            <a href="#" aria-label="Instagram"><Instagram size={18} /></a>
-                            <a href="#" aria-label="YouTube"><Youtube size={18} /></a>
+                            <a href="https://www.facebook.com/itsa.apsit" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook size={18} /></a>
+                            <a href="https://twitter.com/ITSA_APSIT" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><Twitter size={18} /></a>
+                            <a href="https://www.linkedin.com/company/itsaapsit" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={18} /></a>
+                            <a href="https://www.instagram.com/itsa_apsit/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram size={18} /></a>
+                            <a href="https://youtu.be/jwiQE4-DtI4?si=w8X17quMQ6WsBn4a" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><Youtube size={18} /></a>
                         </div>
                     </div>
 
@@ -43,7 +43,7 @@ export default function Footer() {
                                 <Mail size={16} /> it@apsit.edu.in
                             </a>
                             <a href="tel:+912225974747" className="footer-link footer-contact-item">
-                                <Phone size={16} /> +91 22 2597 4747
+                                <Phone size={16} /> +91 87795 19343
                             </a>
                             <span className="footer-link footer-contact-item footer-address">
                                 <MapPin size={16} />

@@ -7,7 +7,7 @@ import {
   BookOpen, Award, Users, Briefcase,
   ArrowRight, Play, Star, Trophy,
   Laptop, GraduationCap, Target, Rocket,
-  ChevronLeft, ChevronRight
+  ChevronLeft, ChevronRight, ExternalLink
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -962,6 +962,7 @@ function SoftwareSection() {
             tagline: item.tagline,
             description: item.description,
             tech: item.tech_stack || [],
+            live_link: item.live_link || null,
             team: teamInitials,
             teamNames: members,
             teamCount: members.length
@@ -1052,6 +1053,18 @@ function SoftwareSection() {
                     </span>
                   </div>
                   <div className="software-view-more">
+                    {project.live_link && (
+                      <a
+                        href={project.live_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="software-live-btn"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ExternalLink size={14} />
+                        <span>Live</span>
+                      </a>
+                    )}
                     <span>View Details</span>
                     <ArrowRight size={14} />
                   </div>
@@ -1126,6 +1139,21 @@ function SoftwareSection() {
                       ))}
                     </div>
                   </div>
+                  {selectedProject.live_link && (
+                    <div className="software-modal-section">
+                      <h4 className="software-modal-section-title">Live Project</h4>
+                      <a
+                        href={selectedProject.live_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="software-modal-live-btn"
+                      >
+                        <ExternalLink size={18} />
+                        <span>View Live Project</span>
+                        <ArrowRight size={16} />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </motion.div>
