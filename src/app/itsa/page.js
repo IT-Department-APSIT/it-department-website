@@ -32,10 +32,10 @@ const committeeMembers = [
     { name: "Aryan Yadav", role: "T&P Co-Head", image: "/assets/itsa-team/Aryan-Yadav.jpg" },
     { name: "Neha Chauhan", role: "Photography Head", image: "/assets/itsa-team/Neha-Chauhan.jpg" },
     { name: "Vaidehi Borekar", role: "Literature Head", image: "/assets/itsa-team/Vaidehi-Borekar.jpg" },
-    { name: "Gauri Borse", role: "Photography Co-Head", image: "/assets/itsa-team/Gauri-Borse.jpg" },
+    { name: "Gauri Borse", role: "Photography Head", image: "/assets/itsa-team/Gauri-Borse.jpg" },
     { name: "Khushi Anchalia", role: "Design Head", image: "/assets/itsa-team/Khushi-Anchalia.jpg" },
     { name: "Rinkal Mishra", role: "Publicity Head", image: "/assets/itsa-team/Rinkal-Mishra.jpg" },
-    { name: "Rutuja Gujar", role: "Literature Co-Head", image: "/assets/itsa-team/rujuta-gujar.jpg" },
+    { name: "Jui Katkade", role: "Publicity Head", image: "/assets/itsa-team/Jui-Katkade.jpg" },
 ];
 const facultyCoordinators = [
     { name: "Prof. Shafaque Fatma Syed", role: "Faculty Co-ordinator", image: "/facultyimages/shafaque.png" },
