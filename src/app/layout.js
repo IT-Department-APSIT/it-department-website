@@ -1,6 +1,7 @@
 import { Poppins, Playfair_Display, Dancing_Script, Inter } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import { Analytics } from "@vercel/analytics/next";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${poppins.variable} ${playfairDisplay.variable} ${dancingScript.variable} ${inter.variable}`}>
         <LayoutWrapper>{children}</LayoutWrapper>
+        <Analytics />
       </body>
     </html>
   );
