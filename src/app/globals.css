@@ -3527,7 +3527,7 @@ ol {
 /* Committee Members Grid */
 .itsa-committee-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -3899,6 +3899,119 @@ ol {
   }
 }
 
+
+/* Phone-sized refinements for the ITSA page. */
+@media (max-width: 576px) {
+  .itsa-hod-section {
+    padding: 48px 0 !important;
+  }
+
+  .itsa-hod-note {
+    padding: 28px 20px !important;
+    border-radius: 16px !important;
+  }
+
+  .itsa-hod-note h2 {
+    font-size: 1.55rem !important;
+    margin-bottom: 16px !important;
+  }
+
+  .itsa-hod-note p {
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+  }
+
+  .itsa-activity-card {
+    gap: 14px !important;
+    padding: 18px !important;
+  }
+
+  .itsa-activity-card > div:first-child {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .itsa-committee-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .itsa-committee-card {
+    min-width: 0;
+    padding: 16px 8px 14px !important;
+    border-radius: 14px !important;
+  }
+
+  .itsa-committee-card > div:first-child {
+    height: 58px !important;
+    border-radius: 14px 14px 50% 50% !important;
+  }
+
+  .itsa-committee-photo {
+    width: min(30vw, 108px) !important;
+    height: min(30vw, 108px) !important;
+    margin: 0 auto 12px !important;
+  }
+
+  .itsa-committee-name {
+    font-size: 0.82rem !important;
+    line-height: 1.25;
+    margin-bottom: 8px !important;
+    overflow-wrap: anywhere;
+  }
+
+  .itsa-committee-role {
+    max-width: 100%;
+    padding: 5px 8px !important;
+    font-size: 0.58rem !important;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  .itsa-faculty-grid {
+    grid-template-columns: 1fr !important;
+    width: 100%;
+    max-width: 360px !important;
+    gap: 16px !important;
+  }
+
+  .itsa-faculty-card {
+    padding: 24px 16px 20px !important;
+  }
+
+  .itsa-faculty-photo {
+    width: 110px !important;
+    height: 110px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .itsa-faculty-name {
+    min-height: 0 !important;
+    font-size: 1rem !important;
+  }
+
+  .itsa-faculty-role {
+    align-self: center;
+    font-size: 0.65rem !important;
+  }
+
+  .itsa-blueback-panel {
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .itsa-committee-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
+  .itsa-committee-photo {
+    width: 112px !important;
+    height: 112px !important;
+  }
+}
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {

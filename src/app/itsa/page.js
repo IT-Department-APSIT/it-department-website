@@ -20,27 +20,30 @@ const staggerContainer = {
 
 
 const committeeMembers = [
-    { name: "Tharani Velar", role: "President", image: "/assets/itsa-team/tharani-velar.jpg" },
-    { name: "Divyashree Bhangle", role: "Vice-President", image: "/assets/itsa-team/divyashree-bhangle.jpg" },
-    { name: "Rudranarayan Sahu", role: "Secretary", image: "/assets/itsa-team/Rudranarayan-Sahu.jpg" },
-    { name: "Shruti Thakur", role: "Treasurer", image: "/assets/itsa-team/Shruti-Thakur.jpg" },
-    { name: "Shrey Nagda", role: "Technical Head", image: "/assets/itsa-team/Shrey-Nagda.jpg" },
-    { name: "Tanishq Shelar", role: "Technical Co-Head", image: "/assets/itsa-team/Tanishq-shelar.jpg" },
-    { name: "Aditya Chavan", role: "CSI Co-Head", image: "/assets/itsa-team/Aditya-Chavan.jpg" },
-    { name: "Mrunmai Dhoble", role: "CSI Head", image: "/assets/itsa-team/Mrunmai-Dhoble.jpg" },
-    { name: "Shubham Pawaskar", role: "T&P Head", image: "/assets/itsa-team/Shubham-Pawaskar.jpg" },
-    { name: "Aryan Yadav", role: "T&P Co-Head", image: "/assets/itsa-team/Aryan-Yadav.jpg" },
-    { name: "Neha Chauhan", role: "Photography Head", image: "/assets/itsa-team/Neha-Chauhan.jpg" },
-    { name: "Vaidehi Borekar", role: "Literature Head", image: "/assets/itsa-team/Vaidehi-Borekar.jpg" },
-    { name: "Gauri Borse", role: "Photography Head", image: "/assets/itsa-team/Gauri-Borse.jpg" },
-    { name: "Khushi Anchalia", role: "Design Head", image: "/assets/itsa-team/Khushi-Anchalia.jpg" },
-    { name: "Rinkal Mishra", role: "Publicity Head", image: "/assets/itsa-team/Rinkal-Mishra.jpg" },
-    { name: "Jui Katkade", role: "Publicity Head", image: "/assets/itsa-team/Jui-Katkade.jpg" },
+    { name: "Shubham Pawaskar", role: "President", image: "/assets/itsa-newteam/president.png" },
+    { name: "Rudranarayan Sahu", role: "Ambassador", image: "/assets/itsa-newteam/ambassador.png" },
+    { name: "Bhavesh Jalalbisht", role: "Vice-President", image: "/assets/itsa-newteam/vp.png" },
+    { name: "Kanksha Vanjare", role: "Secretary", image: "/assets/itsa-newteam/secretary.png" },
+    { name: "Prisha Jain", role: "Treasurer", image: "/assets/itsa-newteam/treasurer.png" },
+    { name: "Tanishq Shelar", role: "Technical Head", image: "/assets/itsa-newteam/tech head.png" },
+    { name: "Dhruv Bandikatte", role: "Technical Co-Head", image: "/assets/itsa-newteam/tech co head 1.png" },
+    { name: "Mahi Katre", role: "Technical Co-Head", image: "/assets/itsa-newteam/tech co head 2.png" },
+    { name: "Shruti Salunkhe", role: "CSI Head", image: "/assets/itsa-newteam/csi head.png" },
+    { name: "Ketkee Bhosale", role: "CSI Co-Head", image: "/assets/itsa-newteam/csi co head.png" },
+    { name: "Pranav Nikam", role: "T&P Head", image: "/assets/itsa-newteam/tp head.png" },
+    { name: "Jyotika Rao", role: "T&P Co-Head", image: "/assets/itsa-newteam/tp co head.png" },
+    { name: "Pranav Godke", role: "Photography Head", image: "/assets/itsa-newteam/photo head.png" },
+    { name: "Aarya Shinde", role: "Literature Head", image: "/assets/itsa-newteam/lit head.png" },
+    { name: "Aahana Kabdugale", role: "Literature Co-Head", image: "/assets/itsa-newteam/lit co head.png" },
+    { name: "Pranali Sawdekar", role: "Design Head", image: "/assets/itsa-newteam/design head.png" },
+    { name: "Sanchita Tambe", role: "Design Co-Head", image: "/assets/itsa-newteam/design co head.png" },
+    { name: "Tanushree Gabhane", role: "Publicity Head", image: "/assets/itsa-newteam/publicity head.png" },
+
 ];
 const facultyCoordinators = [
     { name: "Prof. Shafaque Fatma Syed", role: "Faculty Co-ordinator", image: "/facultyimages/shafaque.png" },
     { name: "Prof. Sonal Jain", role: "Faculty Co-ordinator", image: "/facultyimages/sonalj.png" },
-    { name: "Prof. Shweta Mahajan", role: "Faculty Co-ordinator", image: "/facultyimages/shweta.png" },
+    // { name: "Prof. Shweta Mahajan", role: "Faculty Co-ordinator", image: "/facultyimages/shweta.png" },
 ];
 
 
@@ -219,7 +222,7 @@ export default function ITSAPage() {
                             <motion.div
                                 key={index}
                                 variants={fadeInUp}
-                                className="card"
+                                className="card itsa-activity-card"
                                 style={{
                                     display: 'flex',
                                     gap: 20,
@@ -254,7 +257,7 @@ export default function ITSAPage() {
             </section>
 
             {/* Note from HOD's Desk */}
-            <section style={{
+            <section className="itsa-hod-section" style={{
                 background: '#142445',
                 padding: '80px 0'
             }}>
@@ -267,7 +270,7 @@ export default function ITSAPage() {
                         className="itsa-hod-grid"
                     >
                         <motion.div variants={fadeInUp}>
-                            <div style={{
+                            <div className="itsa-hod-note" style={{
                                 position: 'relative',
                                 padding: '40px',
                                 background: 'rgba(255,255,255,0.05)',
@@ -408,6 +411,7 @@ export default function ITSAPage() {
                                     y: -10,
                                     transition: { duration: 0.3 }
                                 }}
+                                className="itsa-committee-card"
                                 style={{
                                     textAlign: 'center',
                                     padding: '32px 20px 28px',
@@ -435,10 +439,10 @@ export default function ITSAPage() {
                                 }} />
 
                                 {/* Circular Photo with Gradient Ring */}
-                                <div style={{
+                                <div className="itsa-committee-photo" style={{
                                     position: 'relative',
-                                    width: 130,
-                                    height: 130,
+                                    width: 180,
+                                    height: 180,
                                     margin: '0 auto 20px',
                                     borderRadius: '50%',
                                     padding: 4,
@@ -459,9 +463,9 @@ export default function ITSAPage() {
                                         <Image
                                             src={member.image}
                                             alt={member.name}
-                                            width={130}
-                                            height={130}
-                                            sizes="130px"
+                                            width={180}
+                                            height={180}
+                                            sizes="180px"
                                             style={{
                                                 width: '100%',
                                                 height: '100%',
@@ -476,7 +480,7 @@ export default function ITSAPage() {
                                 </div>
 
                                 {/* Name */}
-                                <h3 style={{
+                                <h3 className="itsa-committee-name" style={{
                                     fontSize: '1.15rem',
                                     fontWeight: 700,
                                     color: 'var(--text-primary)',
@@ -487,7 +491,7 @@ export default function ITSAPage() {
                                 </h3>
 
                                 {/* Role Badge */}
-                                <div style={{
+                                <div className="itsa-committee-role" style={{
                                     display: 'inline-block',
                                     padding: '8px 18px',
                                     background: index < 4
@@ -536,6 +540,13 @@ export default function ITSAPage() {
                         viewport={{ once: true }}
                         variants={staggerContainer}
                         className="itsa-faculty-grid"
+                        style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(2, minmax(280px, 1fr))',
+                                maxWidth: '700px',
+                                margin: '0 auto',
+                                gap: '24px',
+                                }}
                     >
                         {facultyCoordinators.map((member, index) => (
                             <motion.div
@@ -545,6 +556,7 @@ export default function ITSAPage() {
                                     y: -10,
                                     transition: { duration: 0.3 }
                                 }}
+                                className="itsa-faculty-card"
                                 style={{
                                     display: 'flex',
                                     flexDirection: 'column',
@@ -570,7 +582,7 @@ export default function ITSAPage() {
                                     borderRadius: '20px 20px 50% 50%',
                                 }} />
 
-                                <div style={{
+                                <div className="itsa-faculty-photo" style={{
                                     position: 'relative',
                                     width: 130,
                                     height: 130,
@@ -603,7 +615,7 @@ export default function ITSAPage() {
                                     </div>
                                 </div>
 
-                                <h3 style={{
+                                <h3 className="itsa-faculty-name" style={{
                                     fontSize: '1.15rem',
                                     fontWeight: 700,
                                     color: 'var(--text-primary)',
@@ -617,7 +629,7 @@ export default function ITSAPage() {
                                     {member.name}
                                 </h3>
 
-                                <div style={{
+                                <div className="itsa-faculty-role" style={{
                                     display: 'inline-block',
                                     padding: '8px 18px',
                                     background: 'linear-gradient(135deg, #f97316 0%, #f59e0b 100%)',
